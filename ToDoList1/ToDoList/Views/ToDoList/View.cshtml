@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ToDoList.Models.ToDoList>
+@{
+    ViewBag.Title = "To Do List";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<h2>To DO List</h2>
+<div class="col-md-12"> 
+    <script type="text/javascript"  >
+         function SaveTask() {
+           
+            var taskId = $("#TaskId").val(); //Taskid
+            var taskName = $("#TaskName").val(); //Task name
+
+            if (taskId === undefined || taskId === "" || taskId === null)
+                taskId = 0
+            
+            
+            if(taskName=="") //check if taskname is blank
+                alert("Please Enter Task Name")
+            else if (!/^[A-Za-z0-9 ._]+$/.test(taskName))// check if taskanme contains nother other than(Alphabets, . , _)
+            {
+                alert("Please Enter Alphabets, Numnbers,period[.], underscore[_] ")
+            }
+            else {
+
+                $.ajax(
+                {
+                    type: "POST", //HTTP POST Method
+                    url: "ToDoList/Index", // Controller/Functioname
+                    data: { //Passing data
+
+                        Name: taskName, //Reading text box values using Jquery
+                        id: taskId,
+                        mode: $("#Mode").val(),
+                    },
+
+                    success: function (value)
+                    {
+                        if (value === "")
+                            alert("fail");
+                        else
+                            alert("Successfully Saved");
+                        $("#divList").html(value);
+                    },
+
+
+                });
+
+
+                $("#TaskName").val("")
+                $("#TaskId").val(0);
+
+                $("#Mode").val("new");
+            }
+           }    
+    </script>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+    <div >
+        <input type="text" class="width80 h3" name="TaskName" id="TaskName" >
+        <input type="hidden"  name="Taskid" id="TaskId" >
+        <input type="hidden" name="Mode" id="Mode" value="new">
+       
+        <button type="button" class="btn btn-primary" id="Save" value="Save" onclick="SaveTask()"  >Save</button>
+       @* @Html.ValidationMessageFor(s=>s.TaskName,"", new { @class ="text-danger"})*@
+       
+
+        </div>
+
+        <br/>
+        <br/>
+
+
+       
+
+
+<div  id="divList" >
+    
+    @Html.Partial("Display")
+</div>
+
+    
+
+    </div>
+
+
+

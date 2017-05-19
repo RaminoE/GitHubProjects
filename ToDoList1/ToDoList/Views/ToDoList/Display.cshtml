@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ToDoList.Models.ToDoList>
+
+@{ 
+   ViewBag.Title = "To Do List";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    
+    //Function to set once the task is completed
+    function Completed(recordId)
+    {
+        $.ajax(
+             {
+                 type: "POST", //HTTP POST Method
+                 url: "ToDoList/Checked", // Controller/View
+                 data: { //Passing data
+
+
+                     id: recordId,
+                     completed: true,
+
+                 },
+                 success: function (value) {
+                     $("#divList").html(value);
+                 }
+                 
+             });
+        alert("asd");
+        $("#TaskName").val("")
+        $("#TaskId").val(0);
+
+        $("#Mode").val("new");
+
+    }
+
+    //function to edit tasks
+    function EditTask(recordId)
+    {
+     
+        var id_Hashtag = '#r'
+        id_Hashtag = id_Hashtag.replace('r', recordId)
+        
+        var taskName_Hashtag = $(id_Hashtag).val();
+           
+        var newUrl = '@Url.Action("Edit", "ToDoList", new { id = "__param__" })';
+        newUrl = newUrl.replace('__param__', recordId);
+        
+        $.ajax(
+            {
+                type: "POST", //HTTP POST Method 
+                url: newUrl,
+                success: function (value) {
+                    $("#divList").html(value);
+
+                }
+
+            });
+
+            var d = recordId;
+            $("#TaskName").val(taskName_Hashtag)
+            $("#TaskId").val(d);
+
+            $("#Mode").val("edit");
+            
+    }
+
+    //function to delete Tasks
+    function DeleteTask(recordId)
+    {
+
+         $.ajax(
+         {
+            type: "POST", //HTTP POST Method
+            url: "ToDoList/Delete", // Controller/View
+            data: { //Passing data
+
+
+                id: recordId,
+
+            },
+            success: function (value) {
+                $("#divList").html(value);
+
+            }
+
+        });
+        alert("done")
+        $("#TaskName").val("")
+        $("#TaskId").val(0);
+
+        $("#Mode").val("new");
+    }
+
+</script>
+
+<style type="text/css">
+    .tooltiptext {
+    position: relative;
+    display: inline-block;
+    
+}
+
+/* Tooltip text for delete*/
+.tooltiptext .tooltipshow {
+    visibility: hidden;
+    width: 50px;
+    font-size:small;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: Absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltiptext:hover .tooltipshow {
+    visibility: visible;
+}
+    tr:hover
+    {
+        border:1px solid black;
+        background-color:aqua;
+        text-decoration-style:solid;
+       font-style:italic;
+       color:brown;
+       font-size:30px;
+        
+    }
+    .table_1{
+
+    }
+</style>
+
+
+<table  class="active width80 " id="testing">
+@foreach (var item in Model)
+{
+
+
+    //to strike throught he text nad set color to red if the task is completed else set color to green
+    <tr @if (item.IsCompleted == true)
+    { <text>class="strike text-danger"</text>} else { <text>class="text-success"</text>}>
+        <td width="3%" hidden="hidden"  > 
+             @item.TaskId
+        </td>
+            @*Hidden value of task name later used in jquery by fetching the value based on Taskid*@
+        <td>
+            <input type="text" hidden ="hidden" 
+                   id=@item.TaskId 
+                   value='@item.TaskName'/>
+            
+        </td>
+        <td width="90%" 
+            id=@item.TaskId 
+            value=@item.TaskName
+            onclick="EditTask(this.id)" >
+                @Html.DisplayFor(modelItem => item.TaskName).ToString()
+        </td>
+
+        <td @if (item.IsCompleted){
+            <text>  onclick="EditTask(this.id)" </text>  }else {  <text>  onclick="Completed(this.id)" </text>  }
+        align = "right"
+            id = "@item.TaskId"
+            value = @item.TaskId >
+                <a @if (item.IsCompleted){
+                     <text> style="visibility:hidden" </text>  } 
+                    href="#" 
+                   class="btn btn-success btn-sm ">
+                            <span class="glyphicon glyphicon-ok " style="color:yellow"></span> Completed
+                </a>
+
+        </td>
+        <td  align="right" 
+            id="@item.TaskId" 
+            value=@item.TaskId 
+            class = "glyphicon glyphicon-trash text-danger tooltiptext" 
+            onclick="DeleteTask(this.id)">
+            <span class="tooltipshow">Delete</span>
+        </td>
+    </tr>
+}
+</table>
