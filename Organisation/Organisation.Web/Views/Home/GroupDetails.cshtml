@@ -1,0 +1,96 @@
+﻿@model Organisation.Web.ViewModels.GroupViewModel
+@{
+    ViewBag.Title = "GroupDetails";
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    function GetDetails(name, type) {
+        alert(type);
+        debugger
+        $.ajax({
+            url: '/Home/Details',
+            type: "POST",
+            data: {
+                selected: type,
+                groupname: name
+            },
+            success: function (value) {
+
+                $("#div1").html(value);
+            }
+        });
+
+
+
+    }
+
+</script>
+@using (Html.BeginForm())
+{
+    <div id="div1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panelbg">
+                    <div class="panel-heading panelheadingbg"><h2>Group: @Model.Name</h2></div>
+                    <div class="panel-body">
+                        @*<div col="row">
+                            <lable id="@Model.Name" type="button" class="btn btn-default" title="View Team"
+                                   onclick="GetDetails(this.id,1)">
+                                <i>View Teams  </i>
+                                @if (!Model.isTeamView)
+                                {
+                                    <span class="label label-info">@Model.teamCount</span>
+                                }
+                            </lable>
+                            <lable id="@Model.Name" type="button" class="btn btn-default" title="View Team"
+                                   onclick="GetDetails(this.id,2)">
+                                <i>View Members  </i>
+                                @if (!Model.isMemberView)
+                                {
+                                    <span class="label label-info">@Model.memberCount</span>
+                                }
+                            </lable>
+
+                        </div>*@
+                        <div id="tab1">
+
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#home" class="text-success">Teams  <span class="label label-success">@Model.teamCount</span>  </a></li>
+                                <li><a data-toggle="tab" href="#menu1" class="text-success">Members  <span class="label label-success">@Model.memberCount</span></a></li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane fade in active">
+
+                                    <h3><label>Teams in @Model.Name</label></h3><br>
+                                    @Html.Partial("_TeamView", Model.Team)
+                                </div>
+                                <div id="menu1" class="tab-pane fade">
+                                    <h3><label>Members in @Model.Name</label></h3><br>
+                                    @Html.Partial("_MemberView", Model.TeamMember)
+                                </div>
+
+                            </div>
+
+                            @*@if (Model.isMemberView)
+                            {
+                                <h3><label>Members in @Model.Name</label></h3><br>
+                                @Html.Partial("_MemberView", Model.TeamMember)
+                            }
+                            else if (Model.isTeamView)
+                            {
+                                <h3><label>Teams in @Model.Name</label></h3><br>
+                                @Html.Partial("_TeamView", Model.Team)
+                            }*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

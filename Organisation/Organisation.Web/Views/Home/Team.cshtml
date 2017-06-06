@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Organisation.Web.ViewModels.TeamViewModel>
+@{
+    ViewBag.Title = "Group";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panelbg">
+            <div class="panel-heading panelheadingbg" >Groups</div>
+            <div class="panel-body" >
+                @Html.Partial("_TeamView", Model)
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+﻿@model Organisation.Web.ViewModels.TeamViewModel
+@{
+    ViewBag.Title = "TeamDetails";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div id="div1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panelbg">
+                    <div class="panel-heading panelheadingbg">
+                      <h2><span>TeamDetails</span></h2>
+                         <table class="displaytable">
+                            <tr>
+                                <td>Team:</td>
+                                <td>@Model.Name</td>
+                            </tr>
+                            <tr>
+                                <td>Client:</td>
+                                <td>@Model.ClientName</td>
+                            </tr>
+                            <tr>
+                                <td>Total Members:</td>
+                                <td>@Model.TeamMembers.Count()</td>
+                            </tr>
+                        </table>
+                  
+                    </div>
+                    <div class="panel-body " >
+                    
+                        <div id="refresh" >
+                         
+                                <h3><label>Members in @Model.Name</label></h3><br>
+                                @Html.Partial("_MemberView", Model.TeamMembers)
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

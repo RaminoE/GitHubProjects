@@ -1,0 +1,30 @@
+﻿using Organisation.Domain.EF;
+using Organisation.Domain.Repository.Pattern.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Organisation.Domain.Repository.Infrastructure
+{
+    public class UnitOfWork : IUnitOfWork
+    {
+        private readonly IDbFactory dbFactory;
+        private OrganisationEntities dbContext;
+
+        public UnitOfWork(IDbFactory dbFactory)
+        {
+            this.dbFactory = dbFactory;
+
+        }
+        public OrganisationEntities DbContext
+        {
+            get { return dbContext ?? (dbContext = dbFactory.Init()); }
+        }
+        public void Commit()
+        {
+            DbContext.Commit();
+        }
+    }
+}

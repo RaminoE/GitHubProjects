@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap -->
+    @Styles.Render("~/bootstrap/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/
+    html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/
+    respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="">
+        <div class="navbar navbar-default navbar-inverse navbar-fixed-top">
+            organisation.com
+        </div>
+    </div>
+        <div id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar glyphicon "></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Organisation", "Index", "Home", new { @class = "navbar-brand" })
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            @Html.ActionLink(" Group", "Group", "Home", new { @class = "glyphicon glyphicon-list" })
+                        </li>
+                        <li class="active">
+                            @Html.ActionLink(" Teams", "Team", "Home", new { @class = "glyphicon glyphicon-list" })
+                        </li>
+                        <li class="active">
+                            @Html.ActionLink(" Members", "Index", "Home", new { @class = "glyphicon glyphicon-list" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+   
+    <div class="container-fluid body-content" >
+        
+        <br/>
+    @RenderBody()
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    @Scripts.Render("~/bootstrap/js")
+</body>
+</html>
+

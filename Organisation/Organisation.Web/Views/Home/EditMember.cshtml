@@ -1,0 +1,150 @@
+﻿@model Organisation.Web.ViewModels.TeamMemberViewModel
+
+@{
+    ViewBag.Title = "EditMember";
+}
+
+
+
+@using (Html.BeginForm("EditCreatTeamMember", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+{
+    @Html.AntiForgeryToken()
+
+    
+        <div class="panel panelpg"  >
+            @if (Model.mode == 1)
+                { <div class="panel-heading" style="background-color:#b1ca41; color:white">Edit Member</div>}
+                else if (Model.mode == 0)
+                {
+                <div class="panel-heading" style="background-color:#b1ca41; color:white" >Member Details</div>
+            }
+            else if (Model.mode == 2)
+            {
+                <div class="panel-heading" style="background-color:#b1ca41; color:white">Create Member</div>
+            }
+
+            <div class="panel-body" >
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-3 space">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-9 space">
+                                    @if (Model.mode == 0)
+                                    { @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control textclass" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    }
+
+                                </div>
+
+
+
+                                <div class="col-md-3 space">
+                                    @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-9 space">
+                                    @if (Model.mode == 0)
+                                    {
+                                        @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control col-md-10", @readonly = "readonly" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                                    }
+                                </div>
+
+                            @Html.EditorFor(model=>model.Image, new { htmlAttributes= new { @hidden = "hidden" } })
+                            <div class="col-md-3 space">
+                                @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label" })
+</div>
+                                <div class="col-md-9 space">
+                                    @if (Model.mode == 0)
+                                    {
+                                        @Html.EditorFor(model => model.DOB, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.DOB, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                    }
+                                </div>
+
+
+                                @if (Model.mode != 0)
+                                {
+                                    <div class="col-md-3 space">
+                                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label" })
+
+                                        </div>
+                                        <div class="col-md-9 space">
+                                            <input type="file" class="form-control" name="file" placeholder="Select picture..">
+                                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                        </div>
+                                        }
+                            <div class="col-md-3 space">
+                                @Html.LabelFor(model => model.IsTeanLead, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-9 space">
+                                    @if (Model.mode == 0)
+                                    {
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.IsTeanLead, new { htmlAttributes = new { @readonly = "readonly" } })
+                                            @Html.ValidationMessageFor(model => model.IsTeanLead, "", new { @class = "text-danger" })
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.IsTeanLead)
+                                            @Html.ValidationMessageFor(model => model.IsTeanLead, "", new { @class = "text-danger" })
+                                        </div>
+                                    }
+
+                                </div>
+
+                            <div class="col-md-3 space">
+                                @Html.LabelFor(model => model.TeamId, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-9 space">
+                                    @if (Model.mode == 0)
+                                    {
+                                        @Html.DropDownListFor(x => x.TeamId, new SelectList(Model.TeamList, "Id", "Name", new { @class = "dropdown-backdrop", @readonly = "readonly", @width = "100%" }),
+"Select Team")
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(x => x.TeamId, new SelectList(Model.TeamList, "Id", "Name", new { @class = "dropdown-backdrop", @width = "100%" }), "Select Team")
+                                        @Html.ValidationMessageFor(model => model.TeamId, "", new { @class = "text-danger" })}
+
+                                </div>
+
+
+                                <div class="col-md-offset-2 col-md-10">
+                                    @if (Model.mode == 1 || Model.mode == 2)
+                                    {
+                                        <input type="submit" value="Save" class="btn btn-default" />
+                                    }
+                                </div>
+
+                            </div>
+
+                        <div class="col-md-6">
+                            <img src="../../images/@Model.Image" height="350px" class="thumbnail" />
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>

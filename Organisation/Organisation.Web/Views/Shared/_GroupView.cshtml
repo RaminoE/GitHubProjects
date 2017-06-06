@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<Organisation.Web.ViewModels.GroupViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col col-md-4">
+                <div class="thumbnail panelbg">
+                   
+                       <lable class="panelbg col-md-12 zoomslide text-success" data-form-method="post" style="padding-top:5px; border-bottom:inherit; "
+                              onclick="location.href = '@(Url.Action("GroupDetails", "Home", new { selected=0,groupname = item.Name }))'">
+                           <label data-form-method="post" class="text-left col-md-10 ">@item.Name</label>
+                           <label data-form-method="post" class="text-right badge">@item.Team.Count()</label>
+                       </lable>
+                  
+                    <div class="row">
+                        <lable class="text-center col-md-12">
+                            <label onclick="location.href = '@(Url.Action("ViewGroupDetails", "Home", new { id = item.Id }))'" title="Edit"
+                                   id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </label>
+
+                            <lable id="@item.Id" type="button" class=" btn btn-danger btn-circle btn-smm zoom" title="Delete"
+                                   onclick="location.href = '@(Url.Action("Delete", "Home", new { id = item.Id }))'">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </lable>
+                        </lable>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>

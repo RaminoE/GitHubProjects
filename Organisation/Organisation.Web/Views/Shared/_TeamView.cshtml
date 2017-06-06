@@ -1,0 +1,37 @@
+﻿
+@model IEnumerable<Organisation.Web.ViewModels.TeamViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col col-md-4">
+            <div class="thumbnail panelbg">
+                <label class="panelbg col-md-12 zoomslide text-success" data-form-method="post" style="padding-top:5px; border-bottom:inherit;"
+                       onclick="location.href = '@(Url.Action("TeamDetails", "Home", new { selected=0,teamname = item.Name }))'">
+                    @item.Name
+                </label>
+
+                <div class="row">
+                    <lable class="text-center col-md-12">
+                        <label onclick="location.href = '@(Url.Action("ViewTeamMember333", "Home", new { id = item.Id }))'" title="Edit"
+                               id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </label>
+
+                        <lable id="@item.Id" type="button" class="btn btn-danger btn-circle btn-smm zoom" title="Delete"
+                               onclick="location.href = '@(Url.Action("Delete", "Home", new { id = item.Id }))'">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </lable>
+                    </lable>
+                </div>
+
+            </div>
+            </div>
+    }
+</div>
+
+

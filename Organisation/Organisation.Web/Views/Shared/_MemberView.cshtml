@@ -1,0 +1,29 @@
+﻿
+@model List<Organisation.Web.ViewModels.TeamMemberViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col col-md-2">
+                <div class="text-center thumbnail " style="border-color:#b1ca41;border-width:2px" >
+                    <img src="../../images/@item.Image" height="150px" class="img-thumbnail zoom"onclick="location.href = '@(Url.Action("EditMember", "Home", new { id = item.Id,mode=0 }))'" />
+                    <label class="text-success">@item.Name</label><br />
+                    <label onclick="location.href = '@(Url.Action("EditMember", "Home", new { id = item.Id , mode=1}))'" title="Edit"
+                           id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </label>
+
+                    <lable id="@item.Id" type="button" class="btn btn-danger btn-circle btn-smm zoom" title="Delete"
+                           onclick="location.href = '@(Url.Action("Delete", "Home", new { id = item.Id }))'">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </lable>
+
+                    
+                </div>
+            </div>
+        }
+    </div>

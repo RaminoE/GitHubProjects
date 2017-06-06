@@ -1,0 +1,139 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+.table td{
+    font-size:12px;
+    padding:4px;
+
+}
+.view {
+overflow:scroll
+
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-smm {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 8px;
+  line-height: 1.5;
+  border-radius: 10px;
+}
+.btn-circle.btn-lgm {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xlm {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.zoom {      
+-webkit-transition: all 0.35s ease-in-out;    
+-moz-transition: all 0.35s ease-in-out;    
+transition: all 0.35s ease-in-out;     
+cursor: -webkit-zoom-in;      
+cursor: -moz-zoom-in;      
+cursor: pointer;  
+}     
+
+.zoomsm {      
+-webkit-transition: all 0.35s ease-in-out;    
+-moz-transition: all 0.35s ease-in-out;    
+transition: all 0.35s ease-in-out;     
+cursor: -webkit-zoom-in;      
+cursor: -moz-zoom-in;      
+cursor: pointer;  
+} 
+.zoomsm:hover,  
+.zoomsm:active,   
+.zoomsm:focus {
+/**adjust scale to desired size, 
+add browser prefixes**/
+color:black
+}
+
+.zoom:hover,  
+.zoom:active,   
+.zoom:focus {
+/**adjust scale to desired size, 
+add browser prefixes**/
+-ms-transform: scale(1.5);    
+-moz-transform: scale(1.5);  
+-webkit-transform: scale(1.5);  
+-o-transform: scale(1.5);  
+transform: scale(1.5);    
+position:relative;      
+z-index:50;  
+}
+
+.zoomslide:hover,  
+.zoomslide:active,   
+.zoomslide:focus {
+/**adjust scale to desired size, 
+add browser prefixes**/
+background-color:#3c763d;
+color:white;
+}
+
+.displaytable td
+{
+    font-size:14px;
+    font-weight:bold;
+   padding:5px;
+   
+}
+
+.textclass{
+    width:80%;
+    
+}
+.space{
+    margin-bottom:30px;
+}
+.panelbg{
+    border-color:#b1ca41;border-width:2px;
+}
+.panelheadingbg{
+background-color:#b1ca41;color:white;
+}
+/**To keep upscaled images visible on mobile, 
+increase left & right margins a bit**/
+@media only screen and (max-width: 308px) {
+}
+/**TIP: Easy escape for touch screens,
+give gallery's parent container a cursor: pointer.**/
