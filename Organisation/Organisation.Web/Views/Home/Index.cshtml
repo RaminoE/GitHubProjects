@@ -2,15 +2,91 @@
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panelbg">
-            <div class="panel-heading" style="background-color:#b1ca41; color:white">Members</div>
-            <div class="panel-body" >
-                @Html.Partial("_MemberView", Model)
+
+<script type="text/javascript">
+    function Filter(data) {
+
+        var text = $("#search").val();
+        if (data == 1) {
+            $("#search").keypress(function (e) {
+
+                if (e.which == 13) {
+
+                    i = true
+                    $.ajax({
+                        url: '/Home/Filter',
+                        type: "POST",
+                        data: {
+                            search: text,
+
+                        },
+                        success: function (value) {
+
+                            $("#indexdiv").html(value);
+                        }
+                    });
+                }
+            });
+        }
+        else if (data == 2) {
+
+            $.ajax({
+                url: '/Home/Filter',
+                type: "POST",
+                data: {
+                    search: text,
+
+                },
+                success: function (value) {
+
+                    $("#indexdiv").html(value);
+                }
+            });
+        }
+    }
+
+    
+
+   
+  
+
+</script>
+    <div id="indexdiv">
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panelbg panel ">
+                    <div class="panel-heading panelheadingbg">
+                        
+                            Members
+                        <lable id="btn" typeof="submit" class="glyphicon  glyphicon-search  pull-right " height="20px" onclick="Filter(2)"></lable>
+                                <input type="text" id="search" class="text-success pull-right" placeholder="Search Member" onkeypress="Filter(1)" />
+                        
+                        </div>
+                        
+
+                    <div class="panel-body">
+
+                        <div class="row space">
+                            <div class="col-md-6">
+                                
+                            </div>
+                            <div class="col-md-1">
+                                
+                            </div>
+                        </div>
+
+
+
+                        @Html.Partial("_MemberView", Model)
+                    </div>
+                </div>
             </div>
-            </div>
+        </div>
     </div>
-</div>

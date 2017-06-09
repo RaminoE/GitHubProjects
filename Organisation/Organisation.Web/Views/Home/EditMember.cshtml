@@ -85,7 +85,7 @@
 
                                         </div>
                                         <div class="col-md-9 space">
-                                            <input type="file" class="form-control" name="file" placeholder="Select picture..">
+                                            <input type="file" class="form-control" name="file" placeholder="Select picture.." value="@Model.Image">
                                             @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                                         </div>
                                         }

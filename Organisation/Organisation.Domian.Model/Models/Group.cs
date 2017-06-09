@@ -16,6 +16,7 @@ namespace Organisation.Domian.Model.Models
         public Group()
         {
             DateCreated = DateTime.Now;
+            DateModified = DateTime.Now;
         }
     }
 }

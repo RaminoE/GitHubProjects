@@ -123,10 +123,11 @@ color:white;
     
 }
 .space{
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 .panelbg{
     border-color:#b1ca41;border-width:2px;
+  
 }
 .panelheadingbg{
 background-color:#b1ca41;color:white;
@@ -135,5 +136,32 @@ background-color:#b1ca41;color:white;
 increase left & right margins a bit**/
 @media only screen and (max-width: 308px) {
 }
+
+.popover {
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 5px;
+   
+    color: #3c763d;
+  display:grid;
+    font-size: 12px;
+    font-family: 'Helvetica', sans-serif;
+    left: -95px;
+    padding: 7px 10px;
+    position: absolute;
+    width: 200px;
+    z-index: 4;
+
+  }
+
+  .form-control{
+      height:24px;
+      font-size:12px;
+      width:100%;
+  }
+  .lablesize{
+      font-size:12px;
+  }
+
+
 /**TIP: Easy escape for touch screens,
 give gallery's parent container a cursor: pointer.**/

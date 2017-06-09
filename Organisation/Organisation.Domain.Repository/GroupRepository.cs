@@ -11,7 +11,8 @@ namespace Organisation.Domain.Repository
 {
     public class GroupRepository : Repository<Group>,IGroupRepository
     {
-        public GroupRepository(IDbFactory dbFactory) : base(dbFactory)
+        public GroupRepository(IDbFactory dbFactory) : 
+            base(dbFactory)
         {
         }
         public Group GetGroupByName(string groupname)

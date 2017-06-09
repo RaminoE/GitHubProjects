@@ -8,11 +8,11 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col col-md-4">
+            <div class="col col-md-3">
                 <div class="thumbnail panelbg">
                    
                        <lable class="panelbg col-md-12 zoomslide text-success" data-form-method="post" style="padding-top:5px; border-bottom:inherit; "
-                              onclick="location.href = '@(Url.Action("GroupDetails", "Home", new { selected=0,groupname = item.Name }))'">
+                              onclick="location.href = '@(Url.Action("GroupDetails", "Home", new { selected=1,groupname = item.Name }))'">
                            <label data-form-method="post" class="text-left col-md-10 ">@item.Name</label>
                            <label data-form-method="post" class="text-right badge">@item.Team.Count()</label>
                        </lable>

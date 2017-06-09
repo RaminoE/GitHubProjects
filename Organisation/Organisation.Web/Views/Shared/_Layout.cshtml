@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     @Styles.Render("~/bootstrap/css")
     @Scripts.Render("~/bundles/modernizr")
     <!--[if lt IE 9]>
@@ -17,42 +18,52 @@
 </head>
 <body>
     <div class="">
-        <div class="navbar navbar-default navbar-inverse navbar-fixed-top">
-            organisation.com
-        </div>
+       
     </div>
-        <div id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top">
+        <div id="myNavbar" class="panelbg zoomsm navbar navbar-default  navbar-fixed-top">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="container">
-                <div class="navbar-header">
+            <div class="container-fluid">
+                <div style="color:darkseagreen">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar glyphicon "></span>
+                        <span class="icon-bar "></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Organisation", "Index", "Home", new { @class = "navbar-brand" })
+                    @Html.ActionLink("Creative Capsule", "Index", "Home", new { @class = "navbar-brand" })
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            @Html.ActionLink(" Group", "Group", "Home", new { @class = "glyphicon glyphicon-list" })
+                    <ul class="nav navbar-nav ">
+                        <li class="text-success">
+                            @Html.ActionLink("Group", "Group", "Home", new { @class = "fa fa-users" })
                         </li>
-                        <li class="active">
-                            @Html.ActionLink(" Teams", "Team", "Home", new { @class = "glyphicon glyphicon-list" })
+                        <li >
+                            @Html.ActionLink("Teams", "Team", "Home", new { @class = "fa fa-tumblr" })
                         </li>
-                        <li class="active">
-                            @Html.ActionLink(" Members", "Index", "Home", new { @class = "glyphicon glyphicon-list" })
+                        <li >
+                            @Html.ActionLink("Members", "Index", "Home", new { @class = "fa fa-user" })
                         </li>
                     </ul>
+
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="text-success">
+                            @Html.ActionLink("Group", "Group", "Home", new { @class = "fa fa-plus" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Teams", "Team", "Home", new { @class = "fa fa-plus" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Members", "CreateTeamMember", "Home",new { id=0,mode=2}, new { @class = "fa fa-user-plus" })
+                        </li>
+                    </ul>
+                   
                 </div>
             </div>
         </div>
    
     <div class="container-fluid body-content" >
-        
-        <br/>
+     
     @RenderBody()
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

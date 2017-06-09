@@ -16,8 +16,13 @@ namespace Organisation.Web.ViewModels
         public bool isGroupSelected { get; set; }
         public bool isTeamView { get; set; }
         public bool isMemberView { get; set; }
+        public bool isChartsView { get; set; }
+
 
         public int teamCount { get; set; }
         public int memberCount { get; set; }
+        public string teamactive { get; set; }
+        public string memberactive { get; set; }
+        public string chartsactive { get; set; }
     }
 }

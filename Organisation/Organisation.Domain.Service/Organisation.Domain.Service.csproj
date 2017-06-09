@@ -43,6 +43,7 @@
     <Compile Include="GroupService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamMemberService.cs" />
+    <Compile Include="TeamMemberAssignmentService.cs" />
     <Compile Include="TeamService.cs" />
   </ItemGroup>
   <ItemGroup>

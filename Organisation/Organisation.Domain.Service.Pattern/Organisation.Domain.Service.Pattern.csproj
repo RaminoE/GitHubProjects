@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IGroupService.cs" />
+    <Compile Include="ITeamMemberAssignmentService.cs" />
     <Compile Include="ITeamMemberService.cs" />
     <Compile Include="ITeamService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

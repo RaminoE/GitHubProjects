@@ -18,6 +18,7 @@ namespace Organisation.Domian.Model.Models
         public Team()
         {
             DateCreated = DateTime.Now;
+            DateModified = DateTime.Now;
         }
 
     }

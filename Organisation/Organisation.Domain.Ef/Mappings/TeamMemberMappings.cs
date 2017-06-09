@@ -17,6 +17,16 @@ namespace Organisation.Domain.EF.Mappings
             Property(t => t.Designation).IsRequired().HasMaxLength(50);
             Property(t => t.DOB).IsRequired();
             Property(t => t.TeamId).IsRequired();
+            Property(t => t.SkypeId).IsRequired();
+            Property(t => t.EmailId).IsRequired();
+            Property(t => t.GmailId).IsRequired();
+            Property(t => t.HighestQualification).IsRequired();
+            Property(t => t.phoneNumber).IsRequired().HasMaxLength(10);
+            Property(t => t.Address).IsRequired();
+            Property(t => t.YearOfPassing).IsRequired();
+            Property(t => t.YearofJoiningTeam).IsRequired();
+            Property(t => t.YearofJoiningCCI).IsRequired();
+            Property(t => t.Technologies).IsRequired();
 
         }
     }

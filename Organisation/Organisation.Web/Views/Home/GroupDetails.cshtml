@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
     function GetDetails(name, type) {
-        alert(type);
+        
         debugger
         $.ajax({
             url: '/Home/Details',
@@ -33,64 +33,74 @@
 @using (Html.BeginForm())
 {
     <div id="div1">
+        <br />
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panelbg">
-                    <div class="panel-heading panelheadingbg"><h2>Group: @Model.Name</h2></div>
+                    <div class="panel-heading panelheadingbg">Group: @Model.Name</div>
                     <div class="panel-body">
                         @*<div col="row">
-                            <lable id="@Model.Name" type="button" class="btn btn-default" title="View Team"
-                                   onclick="GetDetails(this.id,1)">
-                                <i>View Teams  </i>
-                                @if (!Model.isTeamView)
-                                {
-                                    <span class="label label-info">@Model.teamCount</span>
-                                }
-                            </lable>
-                            <lable id="@Model.Name" type="button" class="btn btn-default" title="View Team"
-                                   onclick="GetDetails(this.id,2)">
-                                <i>View Members  </i>
-                                @if (!Model.isMemberView)
-                                {
-                                    <span class="label label-info">@Model.memberCount</span>
-                                }
-                            </lable>
+                                <lable id="@Model.Name" type="button" class="btn btn-default" title="View Team"
+                                       onclick="GetDetails(this.id,1)">
+                                    <i>View Teams  </i>
+                                    @if (!Model.isTeamView)
+                                    {
+                                        <span class="label label-info">@Model.teamCount</span>
+                                    }
+                                </lable>
+                                <lable id="@Model.Name" type="button" class="btn btn-default" title="View Team"
+                                       onclick="GetDetails(this.id,2)">
+                                    <i>View Members  </i>
+                                    @if (!Model.isMemberView)
+                                    {
+                                        <span class="label label-info">@Model.memberCount</span>
+                                    }
+                                </lable>
 
-                        </div>*@
+                            </div>*@
                         <div id="tab1">
 
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#home" class="text-success">Teams  <span class="label label-success">@Model.teamCount</span>  </a></li>
-                                <li><a data-toggle="tab" href="#menu1" class="text-success">Members  <span class="label label-success">@Model.memberCount</span></a></li>
+                                <li class="@Model.teamactive"><a id=@Model.Name data-toggle="tab" onclick="GetDetails(this.id,1)" class="text-success">Teams  <span class="label label-success">@Model.teamCount</span>  </a></li>
+                                <li class="@Model.memberactive"><a id=@Model.Name data-toggle="tab" onclick="GetDetails(this.id,2)" class="text-success">Members  <span class="label label-success">@Model.memberCount</span></a></li>
+                                <li class="@Model.chartsactive"><a id=@Model.Name data-toggle="tab" onclick="GetDetails(this.id,3)" class="text-success">Org. Charts  <span class="label label-success">1</span></a></li>
 
                             </ul>
-                            <div class="tab-content">
-                                <div id="home" class="tab-pane fade in active">
+                            
+                                <div class="tab-pane active">
+                                    @if (Model.isTeamView)
+                                    {  <h3><label>Teams in @Model.Name</label></h3><br>
+                                        @Html.Partial("_TeamView", Model.Team)}
+                                    else if (Model.isMemberView)
+                                    {
+                                        <h3><label>Members in @Model.Name</label></h3><br>
+                                        @Html.Partial("_MemberView", Model.TeamMember)
 
-                                    <h3><label>Teams in @Model.Name</label></h3><br>
-                                    @Html.Partial("_TeamView", Model.Team)
-                                </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <h3><label>Members in @Model.Name</label></h3><br>
-                                    @Html.Partial("_MemberView", Model.TeamMember)
-                                </div>
+                                    }
+                                    else if (Model.isChartsView)
+                                    {
+                                        <h3><label>Chart of @Model.Name</label></h3><br>
+                                        @Html.Partial("_OrgChartView", Model.TeamMember)
+
+                                    }
+
+                                
 
                             </div>
-
-                            @*@if (Model.isMemberView)
-                            {
-                                <h3><label>Members in @Model.Name</label></h3><br>
-                                @Html.Partial("_MemberView", Model.TeamMember)
-                            }
-                            else if (Model.isTeamView)
-                            {
-                                <h3><label>Teams in @Model.Name</label></h3><br>
-                                @Html.Partial("_TeamView", Model.Team)
-                            }*@
+                                @*@if (Model.isMemberView)
+                                    {
+                                        <h3><label>Members in @Model.Name</label></h3><br>
+                                        @Html.Partial("_MemberView", Model.TeamMember)
+                                    }
+                                    else if (Model.isTeamView)
+                                    {
+                                        <h3><label>Teams in @Model.Name</label></h3><br>
+                                        @Html.Partial("_TeamView", Model.Team)
+                                    }*@
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+        }

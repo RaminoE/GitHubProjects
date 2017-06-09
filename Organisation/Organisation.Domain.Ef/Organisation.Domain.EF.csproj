@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Mappings\GroupMappings.cs" />
     <Compile Include="Mappings\TeamMappings.cs" />
+    <Compile Include="Mappings\TeamMemberAssignmentMapping.cs" />
     <Compile Include="Mappings\TeamMemberMappings.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrganisationEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreSeedData.cs" />

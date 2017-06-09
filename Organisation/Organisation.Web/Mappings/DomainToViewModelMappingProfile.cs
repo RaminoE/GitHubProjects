@@ -36,7 +36,7 @@ namespace Organisation.Web.Mappings
                  .ForMember(g => g.Id, map => map.MapFrom(vm => vm.Id))
                  .ForMember(g => g.Image, map => map.MapFrom(vm => vm.Image))
                  .ForMember(g => g.IsTeanLead, map => map.MapFrom(vm => vm.IsTeanLead));
-
+            
 
 
             Mapper.CreateMap<GroupViewModel, Group>()
