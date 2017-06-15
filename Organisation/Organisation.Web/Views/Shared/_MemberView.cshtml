@@ -12,17 +12,21 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
 </script>
+<br />
     <div class="row">
+        
         @foreach (var item in Model)
         {
+            
             <div class="col col-md-2">
                 <div class="text-center thumbnail " style="border-color:#b1ca41;border-width:2px" >
                     <a href="#" title="@item.Name (@item.Designation)" data-toggle="popover" data-trigger="hover" data-content="@item.BriefDescription">
-                        <img src="../../images/@item.Image" height="150px" class="thumbnail zoom" onclick="location.href = '@(Url.Action("CreateTeamMember", "Home", new { id = item.Id,mode=0 }))'" />
+                        <img src="../../images/@item.Image" class="thumbnail zoom pic-pad" onclick="location.href = '@(Url.Action("CreateTeamMember", "Home", new { id = item.Id,mode=0 }))'" />
                         </a>
-                        
-                        
-                        <label class="text-success">@item.Name</label><br />
+
+
+                        <label class="text-success">@item.Name</label>
+                    <br />
                         <label onclick="location.href = '@(Url.Action("CreateTeamMember", "Home", new { id = item.Id , mode=1}))'" title="Edit"
                                id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
                             <i class="glyphicon glyphicon-pencil"></i>

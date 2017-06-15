@@ -48,17 +48,24 @@ namespace Organisation.Domain.Repository
             dbSet.Remove(entity);
 
         }
+
+        public virtual void Delete(int id)
+        {
+           var g= dbSet.Find(id);
+            dbSet.Remove(g);
+
+        }
         public virtual T GetById(int id)
         {
             return dbSet.Find(id);
         }
-        public virtual IEnumerable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
-            return dbSet.ToList();
+            return dbSet.AsQueryable();
         }
-        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
+        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where,int skip,int take)
         {
-            return dbSet.Where(where).ToList();
+            return dbSet.Where(where).ToList().Skip(skip).Take(take);
         }
         public virtual T Get(Expression<Func<T, bool>> where)
         {

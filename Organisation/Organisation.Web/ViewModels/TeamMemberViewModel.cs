@@ -41,7 +41,7 @@ namespace Organisation.Web.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DOB { get; set; }
 
-
+        public int calledFrom { get; set; }
         public string Image { get; set; }
 
 

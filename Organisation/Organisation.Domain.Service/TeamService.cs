@@ -54,7 +54,7 @@ namespace Organisation.Domain.Service
         public IEnumerable<Team> GetTeamByGroup(string groupname, string teamname = null)
         {
             var group = groupRepository.GetGroupByName(groupname);
-            return teamRepository.GetMany(t => t.GroupId==group.Id);
+            return teamRepository.GetMany(t => t.GroupId==group.Id,0,0);
         }
 
         public void SaveTeam()

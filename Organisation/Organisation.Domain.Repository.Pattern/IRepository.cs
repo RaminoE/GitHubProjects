@@ -12,9 +12,10 @@ namespace Organisation.Domain.Repository.Pattern
         void Add(T entity);
         void Update(T Entity);
         void Delete(T entity);
+        void Delete(int id);
         T GetById(int id);
-        IEnumerable<T> GetAll();
-        IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
+        IQueryable<T> GetAll();
+        IEnumerable<T> GetMany(Expression<Func<T, bool>> where,int skip, int take);
         T Get(Expression<Func<T, bool>> where);
 
     }

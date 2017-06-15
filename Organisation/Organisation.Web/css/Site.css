@@ -161,6 +161,15 @@ increase left & right margins a bit**/
   .lablesize{
       font-size:12px;
   }
+.thumbnail a > img, .thumbnail > img {
+    height:200px;
+}
+.pic-pad
+{
+    width: 90%;
+    height: 200px !important;
+}
+
 
 
 /**TIP: Easy escape for touch screens,

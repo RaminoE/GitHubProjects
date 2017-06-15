@@ -7,6 +7,7 @@ using Organisation.Domain.Service.Pattern;
 using Organisation.Domain.Repository;
 using Organisation.Domain.Repository.Pattern.Infrastructure;
 using Organisation.Domian.Model.Models;
+using System.Linq.Expressions;
 
 namespace Organisation.Domain.Service
 {
@@ -60,6 +61,16 @@ namespace Organisation.Domain.Service
         public void DeleteTeamMember(TeamMember teamMember)
         {
             teamMemberRepository.Delete(teamMember);
+        }
+
+        public void DeleteTeamMember(int id)
+        {
+            teamMemberRepository.Delete(id);
+        }
+
+        public IEnumerable<TeamMember> GetMany(Expression<Func<TeamMember, bool>> where ,int skip,int take)
+        {
+           return  teamMemberRepository.GetMany(where, skip,  take);
         }
 
         public void SaveTeamMember()

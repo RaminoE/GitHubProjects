@@ -24,5 +24,7 @@ namespace Organisation.Web.ViewModels
         public string teamactive { get; set; }
         public string memberactive { get; set; }
         public string chartsactive { get; set; }
+
+        public int pagesize { get; set; }
     }
 }

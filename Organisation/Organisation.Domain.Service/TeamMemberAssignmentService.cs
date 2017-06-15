@@ -48,7 +48,7 @@ namespace Organisation.Domain.Service
         public IEnumerable<TeamMemberAssignment> GetTeamMemberAssignmentByTeam(string teamname, string TeamMemberAssignmentname = null)
         {
             var team = teamRepository.GetTeamByName(teamname);
-            return teammemberAssignmentRepository.GetMany(t => t.TeamId == team.Id);
+            return teammemberAssignmentRepository.GetMany(t => t.TeamId == team.Id,0,0);
         }
 
         public void SaveTeamMemberAssignment()

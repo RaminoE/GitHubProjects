@@ -2,45 +2,134 @@
 @{
     ViewBag.Title = "TeamDetails";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    function GetTabDetails(name, type) {
+        $("#type").val(type);
+        $("#currentpage").val("1");
+       
+        $.ajax({
+            url: '/Home/TeamTabDetails',
+            type: "POST",
+            data: {
+                selected: type,
+                teamname: name
+            },
+            success: function (value) {
+               
+                if (type == 1) {
+                    $("#divTeamDetails").show();
+                    $("#divTeamChart").hide();
+                    $("#divMemberList").hide();
+                    $("#divteam1").html(value);
+                }
+                if (type == 2 || type == 4 || type == 5) {
+                   
+                    $("#divTeamDetails").hide();
+                    $("#divTeamChart").hide();
+                    $("#divMemberList").show();
+                    $("#divMemberList").html(value);
+                }
+                if (type == 3) {
+                    $("#divTeamDetails").hide();
+                    $("#divTeamChart").show();
+                    $("#divMemberList").hide();
+                    $("#divTeamChart").html(value);
+                }
 
 
 
-@using (Html.BeginForm())
-{
-    <div id="div1">
-        <br />
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panelbg">
-                    <div class="panel-heading panelheadingbg">
-                      <h2><span>TeamDetails</span></h2>
-                         <table class="displaytable">
-                            <tr>
-                                <td>Team:</td>
-                                <td>@Model.Name</td>
-                            </tr>
-                            <tr>
-                                <td>Client:</td>
-                                <td>@Model.ClientName</td>
-                            </tr>
-                            <tr>
-                                <td>Total Members:</td>
-                                <td>@Model.TeamMembers.Count()</td>
-                            </tr>
-                        </table>
-                  
+
+
+            }
+        });
+
+
+
+    }
+
+</script>
+
+<div id="divteam1">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panelbg">
+                <div class="panel-heading panelheadingbg">
+                    Team:@Model.Name
+
+                </div>
+                <div class="panel-body ">
+                   <input id="type" type="text" hidden="hidden" >
+                    <input id="billable" type="text" value="@Model.billableMemberCount" hidden="hidden">
+                    <input id="nonbill" type="text" value="@Model.nonBillableMemberCount" hidden="hidden">
+                    <input id="bench" type="text" value="@Model.benchMemberCount" hidden="hidden">
+                    <input id="id" type="text" value="@Model.Id" hidden="hidden">
+                    <input id="currentpage" type="text" value="1" hidden="hidden" >
+                    <input id="pagesize" type="text" value="@Model.pagesize" hidden="hidden">
+                    <input id="memberViewCalledFrom" type="text" value="2" hidden="hidden">
+                    <div id="teamtab">
+                        <ul class="nav nav-tabs">
+                            <li class="@Model.teamactive"><a id=@Model.Name data-toggle="tab" onclick="GetTabDetails(this.id,1)" class="text-success">Teams   </a></li>
+                            <li class="@Model.billMemberactive"><a id=@Model.Name data-toggle="tab" onclick="GetTabDetails(this.id, 2)" class="text-success">Members (Billable) <span class="label label-success">@Model.billableMemberCount</span></a></li>
+                            <li class="@Model.nonBillMemberactive"><a id=@Model.Name data-toggle="tab" onclick="GetTabDetails(this.id, 4)" class="text-success">Members (Non-Billable)  <span class="label label-success">@Model.nonBillableMemberCount</span></a></li>
+                            <li class="@Model.benchMemberactive"><a id=@Model.Name data-toggle="tab" onclick="GetTabDetails(this.id, 5)" class="text-success">Members (Bench)  <span class="label label-success">@Model.benchMemberCount</span></a></li>
+                            <li class="@Model.chartsactive"><a id=@Model.Name data-toggle="tab" onclick="GetTabDetails(this.id, 3)" class="text-success">Team Charts </a></li>
+
+                        </ul>
                     </div>
-                    <div class="panel-body " >
-                    
-                        <div id="refresh" >
-                         
-                                <h3><label>Members in @Model.Name</label></h3><br>
-                                @Html.Partial("_MemberView", Model.TeamMembers)
-                           
-                        </div>
+
+                    <div class="tab-pane active">
+                        @using (Html.BeginForm())
+                        {
+                            <div id="divTeamDetails">
+                                <h3><label>@Model.Name Details</label></h3><br>
+                                <table class="displaytable">
+                                    <tr>
+                                        <td>Team:</td>
+                                        <td>@Model.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Client:</td>
+                                        <td>@Model.ClientName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Members:</td>
+                                        <td>@Model.toatalMemberCount</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        }
+
+                        @using (Html.BeginForm())
+                        {
+                            <div id="divMemberList" hidden="hidden">
+                              
+                            </div>
+                        }
+
+
+                        @using (Html.BeginForm())
+                        {
+                            <div id="divTeamChart" hidden="hidden">
+                              
+                            </div>
+                        }
+
+
+
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
-}
+</div>
+
+

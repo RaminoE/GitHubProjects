@@ -11,6 +11,30 @@
 
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        var selectedDT = $("#memberstatus").val();
+       
+        if (selectedDT == "" ) {
+            $("#rowBillablestatus").hide();
+            $("#rowTeam").hide();
+        }
+        else if(selectedDT==null)
+        {
+
+        }
+        else if (selectedDT == 0) {
+           
+            $("#rowBillablestatus").show();
+            $("#rowTeam").show();
+        }
+        else
+        {
+          
+            $("#rowBillablestatus").hide();
+            $("#rowTeam").hide();
+        }
+    });
+
     $(function () {
 
         $('#memberstatus').change(function () {
@@ -29,7 +53,7 @@
                     $("#rowTeam").show();
                 }
                 else {
-                    alert("Hide");
+                    
 
                     $("#Billablestatus").val("");
 

@@ -1,0 +1,225 @@
+﻿
+@model List<Organisation.Web.ViewModels.TeamMemberViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        debugger
+        var type = $("#type").val();
+        pagesize = $("#pagesize").val();
+        var calledfrom = $("#memberViewCalledFrom").val();
+        var count = 0
+       
+        var current = $("#currentpage").val();
+        if (type == 2) {
+            if (calledfrom == 1)
+                count = $("#count").val();
+            else if (calledfrom == 2)
+                count = $("#billable").val();
+        }
+        else if (type == 4)
+            count = $("#nonbill").val();
+        else if (type == 5)
+            count = $("#bench").val();
+        else
+            count = $("#count").val();
+       
+        var i = 0;
+        var displaypages = 5;
+        var pagecount = Math.ceil(parseInt(count, 10) / parseInt(pagesize, 10))
+       
+        if (displaypages >= pagecount) {
+            
+            i = 1;
+            end = pagecount;
+
+        }else{
+
+            var maxnumber = parseInt(current, 10) + displaypages;
+
+
+            var mid = Math.ceil(parseInt(displaypages, 10) / 2);
+
+            var start = parseInt(current, 10) - parseInt(mid, 10);
+
+            var end = parseInt(current, 10) + parseInt(mid, 10);
+
+            var middle = Math.ceil(end / 2);
+             i = 1;
+            if (current == 1) {
+                end = parseInt(end, 10) + 1
+            }
+            else {
+                if (end > pagecount) {
+                    end = pagecount
+                    i = parseInt(end, 10) - parseInt(displaypages, 10);
+                }
+                else {
+                    if (current < middle)
+                    { i = parseInt(end, 10) - displaypages; }
+                    else {
+                        i = parseInt(end, 10) - displaypages;
+                    }
+
+                }
+            }
+        }
+        if (i == 0)
+            i = 1;
+
+        if (pagecount > 1) {
+            if (current > 1) {
+                $("#pre").append(" <span class='btn btn-default ' id=" + 1 + " onclick='GetDetails(this.id,0,0)'>First</span>");
+
+                var g = parseInt(current, 10) - 1;
+                $("#pre").append(" <span class='btn btn-default glyphicon glyphicon-chevron-left' id=" + g + " onclick='GetDetails(this.id,0,0)'></span>");
+            }
+            else {
+                $("#pre").append(" <span class='btn btn-default disabled'  id=" + 1 + "> First </span>");
+
+                var g = parseInt(current, 10) - 1;
+                $("#pre").append(" <span class='btn btn-sm btn-default disabled glyphicon glyphicon-chevron-left' id=" + g + " '></span>");
+            }
+
+          
+
+            for (i; i <= end ; i++) {
+                    if (current == i)
+                        $("#num").append(" <span class='btn btn-danger' id=" + i + " onclick='GetDetails(this.id,0,0)'>" + i + "</span>");
+                    else
+                        $("#num").append(" <span class='btn btn-default' id=" + i + " onclick='GetDetails(this.id,0,0)'>" + i + "</span>");
+                }
+            
+            if (current != pagecount) {
+                var g = parseInt(current, 10) + 1;
+
+                $("#next").append(" <span class='btn btn-default glyphicon glyphicon-chevron-right' id=" + g + " onclick='GetDetails(this.id,0,0)'></span>");
+
+                $("#next").append(" <span class='btn btn-default ' id=" + pagecount + " onclick='GetDetails(this.id,0,0)'>Last</span>");
+            }
+            else {
+                $("#next").append(" <span class='btn btn-default disabled glyphicon glyphicon-chevron-right' id=" + g + " '></span>");
+
+                $("#next").append(" <span class='btn btn-default disabled' id=" + pagecount + " '>Last</span>");
+            }
+            
+        }
+        else {
+
+        }
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+<script type="text/javascript">
+    function GetDetails(page1,memid,isdelete) {
+       
+        var calledfrom = $("#memberViewCalledFrom").val();
+        var memberid = 0;
+        var page = 0;
+       
+       
+        var type = $("#type").val();
+        if (isdelete == 1) {
+            var r = confirm("Are you sure you want to Delete");
+            if (r == true) {
+                var current = $("#currentpage").val();
+                page = current;
+                memberid = memid;
+               
+            } else {
+                var current = $("#currentpage").val();
+               
+                page = current;
+                memberid = 0;
+                isdelete = 0;
+            }
+            
+        }
+        else
+        {
+            page = page1;
+            $("#currentpage").val(page);
+        }
+
+            var count = "";
+        $.ajax({
+            url: '/Home/MemberPartial',
+            type: "Get",
+            data: {
+                id: $("#id").val(),
+                type: type,
+                calledfrom: calledfrom,
+                isdelete: isdelete,
+                memberid:memberid,
+                page: page
+            },
+            success: function (value) {
+
+                $(this).attr('class', 'btn-danger');
+                $("#ref").html(value);
+
+            }
+        });
+
+
+
+    }
+
+   
+</script>
+<br />
+
+<div id="ref">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+
+            <div class="col col-md-2 ">
+                <div class="text-center thumbnail " style="border-color:#b1ca41;border-width:2px">
+                    <a href="#" title="@item.Name (@item.Designation)" data-toggle="popover" data-trigger="hover" data-content="@item.BriefDescription">
+                        <img src="../../images/@item.Image" class="thumbnail zoom pic-pad" onclick="location.href = '@(Url.Action("CreateTeamMember", "Home", new { id = item.Id,mode=0 }))'" />
+                    </a>
+
+
+                    <label class="text-success">@item.Name</label>
+                    <br />
+                    <label onclick="location.href = '@(Url.Action("CreateTeamMember", "Home", new { id = item.Id , mode=1}))'" title="Edit"
+                           id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </label>
+
+                    <lable id="@item.Id" type="button" class="btn btn-danger btn-circle btn-smm zoom" title="Delete"
+                           onclick="GetDetails(1,this.id,1)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </lable>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+        }
+    </div>
+
+
+
+    <div class="pagination ">
+
+        <lable id="pre"></lable>
+        <lable id="num"></lable>
+        <lable id="next"></lable>
+
+
+    </div>
+</div>
