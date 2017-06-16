@@ -11,7 +11,7 @@ using Organisation.Domain.Repository.Pattern.Infrastructure;
 
 namespace Organisation.Domain.Repository
 {
-    public abstract class Repository<T> where T:class
+    public abstract class Repository<T> where T : class
     {
         #region Properties
         private readonly IDbSet<T> dbSet;
@@ -40,7 +40,7 @@ namespace Organisation.Domain.Repository
         }
         public virtual void Update(T Entity)
         {
-           // dbSet.Attach(Entity);
+            // dbSet.Attach(Entity);
             dbContext.Entry(Entity).State = EntityState.Modified;
         }
         public virtual void Delete(T entity)
@@ -51,7 +51,7 @@ namespace Organisation.Domain.Repository
 
         public virtual void Delete(int id)
         {
-           var g= dbSet.Find(id);
+            var g = dbSet.Find(id);
             dbSet.Remove(g);
 
         }
@@ -63,9 +63,9 @@ namespace Organisation.Domain.Repository
         {
             return dbSet.AsQueryable();
         }
-        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where,int skip,int take)
+        public virtual IQueryable<T> GetMany(Expression<Func<T, bool>> where, int skip, int take)
         {
-            return dbSet.Where(where).ToList().Skip(skip).Take(take);
+            return dbSet.Where(where).ToList().Skip(skip).Take(take).AsQueryable();
         }
         public virtual T Get(Expression<Func<T, bool>> where)
         {

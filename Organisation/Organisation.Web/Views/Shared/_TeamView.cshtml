@@ -3,8 +3,43 @@
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    function DeleteTeam(id) {
+
+        var r = confirm("Are you sure you want to Delete");
+        if (r == true) {
+            $.ajax({
+                url: '/Home/DeleteTeam',
+                type: "Post",
+                data: {
+                    id: id
+
+                },
+                success: function (value) {
+
+                    if (value.success == false) {
+                        alert("Cannot Delete Team as It has Members");
+                    } else {
+
+                        alert("Deleted Successfully");
+                        $("#teamref").html(value);
+                    }
 
 
+
+                }
+            });
+        }
+        else {
+
+        }
+}
+</script>
+<div id="teamref">
 <div class="row">
     @foreach (var item in Model)
     {
@@ -12,18 +47,19 @@
             <div class="thumbnail panelbg">
                 <label class="panelbg col-md-12 zoomslide text-success" data-form-method="post" style="padding-top:5px; border-bottom:inherit;"
                        onclick="location.href = '@(Url.Action("TeamDetails", "Home", new { selected=0,teamname = item.Name }))'">
-                    @item.Name
+                    <label data-form-method="post" class="text-left col-md-10 ">@item.Name</label>
+                    <label data-form-method="post" class="text-right badge">@item.toatalMemberCount</label>
                 </label>
 
                 <div class="row">
                     <lable class="text-center col-md-12">
-                        <label onclick="location.href = '@(Url.Action("ViewTeamMember333", "Home", new { id = item.Id }))'" title="Edit"
+                        <label onclick="location.href = '@(Url.Action("CreateEditTeam", "Home", new { id = item.Id,mode=1}))'" title="Edit"
                                id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
                             <i class="glyphicon glyphicon-pencil"></i>
                         </label>
 
                         <lable id="@item.Id" type="button" class="btn btn-danger btn-circle btn-smm zoom" title="Delete"
-                               onclick="location.href = '@(Url.Action("Delete", "Home", new { id = item.Id }))'">
+                               onclick="DeleteTeam(this.id)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </lable>
                     </lable>
@@ -33,5 +69,6 @@
             </div>
     }
 </div>
+    </div>
 
 

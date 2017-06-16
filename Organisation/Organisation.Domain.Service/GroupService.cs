@@ -25,7 +25,10 @@ namespace Organisation.Domain.Service
         {
             groupRepository.Add(group);
         }
-
+        public void DeleteGroup(int id)
+        {
+            groupRepository.Delete(id);
+        }
         public void DeleteGroup(Group group)
         {
             groupRepository.Delete(group);

@@ -194,6 +194,8 @@
     <Content Include="Views\Home\CreateTeamMember.cshtml" />
     <Content Include="Views\Shared\_OrgChartView.cshtml" />
     <Content Include="Views\Shared\_MemberListView.cshtml" />
+    <Content Include="Views\Home\CreateEditGroup.cshtml" />
+    <Content Include="Views\Home\CreateEditTeam.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

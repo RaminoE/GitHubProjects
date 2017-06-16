@@ -32,7 +32,10 @@ namespace Organisation.Domain.Service
         {
             teamRepository.Delete(team);
         }
-
+        public void DeleteTeam(int id)
+        {
+            teamRepository.Delete(id);
+        }
         public IEnumerable<Team> GetAllTeam(string name = null)
         {
             if (string.IsNullOrEmpty(name))

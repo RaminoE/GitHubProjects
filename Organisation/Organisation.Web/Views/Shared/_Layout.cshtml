@@ -48,10 +48,10 @@
 
                     <ul class="nav navbar-nav pull-right">
                         <li class="text-success">
-                            @Html.ActionLink("Group", "Group", "Home", new { @class = "fa fa-plus" })
+                            @Html.ActionLink("Group", "CreateEditGroup", "Home", new { id = 0, mode = 2 }, new { @class = "fa fa-plus" })
                         </li>
                         <li>
-                            @Html.ActionLink("Teams", "Team", "Home", new { @class = "fa fa-plus" })
+                            @Html.ActionLink("Teams", "CreateEditTeam", "Home", new { id = 0, mode = 2 }, new { @class = "fa fa-plus" })
                         </li>
                         <li>
                             @Html.ActionLink("Members", "CreateTeamMember", "Home",new { id=0,mode=2}, new { @class = "fa fa-user-plus" })

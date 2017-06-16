@@ -1,6 +1,7 @@
 ﻿using Organisation.Domian.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace Organisation.Web.ViewModels
     public class GroupViewModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please Fill")]
         public string Name { get; set; }
         public IEnumerable<TeamViewModel> Team { get; set; }
         public IEnumerable<TeamMemberViewModel> TeamMember { get; set; }
@@ -26,5 +28,7 @@ namespace Organisation.Web.ViewModels
         public string chartsactive { get; set; }
 
         public int pagesize { get; set; }
+        public string previousUrl { get; set; }
+        public int mode { get; set; }
     }
 }

@@ -9,9 +9,9 @@ using Organisation.Domain.Repository.Pattern;
 
 namespace Organisation.Domain.Repository
 {
-    public class GroupRepository : Repository<Group>,IGroupRepository
+    public class GroupRepository : Repository<Group>, IGroupRepository
     {
-        public GroupRepository(IDbFactory dbFactory) : 
+        public GroupRepository(IDbFactory dbFactory) :
             base(dbFactory)
         {
         }

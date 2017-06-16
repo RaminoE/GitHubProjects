@@ -7,7 +7,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
+
+<script type="text/javascript">
     $(document).ready(function () {
 
         debugger
@@ -15,13 +16,15 @@
         pagesize = $("#pagesize").val();
         var calledfrom = $("#memberViewCalledFrom").val();
         var count = 0
-       
+
         var current = $("#currentpage").val();
         if (type == 2) {
             if (calledfrom == 1)
                 count = $("#count").val();
             else if (calledfrom == 2)
                 count = $("#billable").val();
+            if (calledfrom == 3)
+                count = $("#memcount").val();
         }
         else if (type == 4)
             count = $("#nonbill").val();
@@ -29,13 +32,13 @@
             count = $("#bench").val();
         else
             count = $("#count").val();
-       
+
         var i = 0;
         var displaypages = 5;
         var pagecount = Math.ceil(parseInt(count, 10) / parseInt(pagesize, 10))
-       
+
         if (displaypages >= pagecount) {
-            
+
             i = 1;
             end = pagecount;
 
@@ -87,7 +90,7 @@
                 $("#pre").append(" <span class='btn btn-sm btn-default disabled glyphicon glyphicon-chevron-left' id=" + g + " '></span>");
             }
 
-          
+
 
             for (i; i <= end ; i++) {
                     if (current == i)
@@ -95,7 +98,7 @@
                     else
                         $("#num").append(" <span class='btn btn-default' id=" + i + " onclick='GetDetails(this.id,0,0)'>" + i + "</span>");
                 }
-            
+
             if (current != pagecount) {
                 var g = parseInt(current, 10) + 1;
 
@@ -108,22 +111,21 @@
 
                 $("#next").append(" <span class='btn btn-default disabled' id=" + pagecount + " '>Last</span>");
             }
-            
+
         }
         else {
 
         }
         $('[data-toggle="popover"]').popover();
     });
-</script>
-<script type="text/javascript">
+
     function GetDetails(page1,memid,isdelete) {
-       
+
         var calledfrom = $("#memberViewCalledFrom").val();
         var memberid = 0;
         var page = 0;
-       
-       
+
+
         var type = $("#type").val();
         if (isdelete == 1) {
             var r = confirm("Are you sure you want to Delete");
@@ -131,15 +133,15 @@
                 var current = $("#currentpage").val();
                 page = current;
                 memberid = memid;
-               
+
             } else {
                 var current = $("#currentpage").val();
-               
+
                 page = current;
                 memberid = 0;
                 isdelete = 0;
             }
-            
+
         }
         else
         {
@@ -147,7 +149,7 @@
             $("#currentpage").val(page);
         }
 
-            var count = "";
+        var count = "";
         $.ajax({
             url: '/Home/MemberPartial',
             type: "Get",
@@ -166,12 +168,7 @@
 
             }
         });
-
-
-
     }
-
-   
 </script>
 <br />
 

@@ -104,7 +104,7 @@ namespace Organisation.Web.ViewModels
         [Required(ErrorMessage = "Please Fill")]
 
         public string GmailId { get; set; }
-
+        public string previousUrl { get; set; }
 
         public HttpPostedFileBase File { get; set; }
         public int mode { get; set; }

@@ -3,29 +3,64 @@
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"> 
+    function DeleteGroup(id) {
+
+        var r = confirm("Are you sure you want to Delete");
+        if (r == true) {
+            $.ajax({
+                url: '/Home/DeleteGroup',
+                type: "Post",
+                data: {
+                    id: id
+
+                },
+                success: function (value) {
+
+                    if (value.success == false) {
+                        alert("Cannot Delete Group as It has Teams");
+                    } else {
+
+                        alert("Deleted Successfully");
+                        $("#groupref").html(value);
+                    }
 
 
+
+                }
+            });
+        }
+        else {
+
+        }
+}
+</script>
+
+<div id="groupref">
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col col-md-3">
                 <div class="thumbnail panelbg">
-                   
-                       <lable class="panelbg col-md-12 zoomslide text-success" data-form-method="post" style="padding-top:5px; border-bottom:inherit; "
-                              onclick="location.href = '@(Url.Action("GroupDetails", "Home", new { selected=1,groupname = item.Name }))'">
-                           <label data-form-method="post" class="text-left col-md-10 ">@item.Name</label>
-                           <label data-form-method="post" class="text-right badge">@item.Team.Count()</label>
-                       </lable>
-                  
+
+                    <lable class="panelbg col-md-12 zoomslide text-success" data-form-method="post" style="padding-top:5px; border-bottom:inherit; "
+                           onclick="location.href = '@(Url.Action("GroupDetails", "Home", new { selected=1,groupname = item.Name }))'">
+                        <label data-form-method="post" class="text-left col-md-10 ">@item.Name</label>
+                        <label data-form-method="post" class="text-right badge">@item.Team.Count()</label>
+                    </lable>
+
                     <div class="row">
                         <lable class="text-center col-md-12">
-                            <label onclick="location.href = '@(Url.Action("ViewGroupDetails", "Home", new { id = item.Id }))'" title="Edit"
+                            <label onclick="location.href = '@(Url.Action("CreateEditGroup", "Home", new { id = item.Id,mode=1 }))'" title="Edit"
                                    id="@item.Id" type="button" class="btn btn-success btn-circle btn-smm zoom">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </label>
 
-                            <lable id="@item.Id" type="button" class=" btn btn-danger btn-circle btn-smm zoom" title="Delete"
-                                   onclick="location.href = '@(Url.Action("Delete", "Home", new { id = item.Id }))'">
+                            <lable id="@item.Id" type="button" class="btn btn-danger btn-circle btn-smm zoom" title="Delete"
+                                   onclick="DeleteGroup(this.id)">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </lable>
                         </lable>
@@ -36,3 +71,4 @@
             </div>
         }
     </div>
+</div>

@@ -16,7 +16,7 @@ using System.Configuration;
 
 namespace Organisation.Web.Controllers
 {
-  
+
     public class HomeController : Controller
     {
         int pagesize = Convert.ToInt32(ConfigurationManager.AppSettings["GridPageSize"].ToString());
@@ -37,11 +37,26 @@ namespace Organisation.Web.Controllers
             IEnumerable<TeamMember> member;
             IEnumerable<Group> group;
 
-            member = teamMemberService.GetAllTeamMember(membername).ToList();
+            member = teamMemberService.GetAllTeamMember().ToList();
 
             viewModelTeammember = Mapper.Map<IEnumerable<TeamMember>, IEnumerable<TeamMemberViewModel>>(member);
+
             return View(viewModelTeammember);
         }
+        [HttpPost]
+        public ActionResult Index(int id)
+        {
+            IEnumerable<TeamMemberViewModel> viewModelTeammember;
+            IEnumerable<TeamMember> member;
+
+
+            member = teamMemberService.GetMany(c => c.Id != 0, 0, 6).ToList();
+
+            viewModelTeammember = Mapper.Map<IEnumerable<TeamMember>, IEnumerable<TeamMemberViewModel>>(member);
+
+            return PartialView("_MemberListView", viewModelTeammember);
+        }
+
         [HttpPost]
         public ActionResult Filter(string search)
 
@@ -51,13 +66,13 @@ namespace Organisation.Web.Controllers
             IEnumerable<Group> group;
             if (string.IsNullOrEmpty(search))
             {
-                member = teamMemberService.GetAllTeamMember(search).ToList();
+                member = teamMemberService.GetMany(c => c.Id != 0, 0, 6).ToList();
             }
-            else { member = teamMemberService.GetMany(p => p.Name.ToLower().Contains(search.ToLower()),0,12).ToList(); }
+            else { member = teamMemberService.GetMany(p => p.Name.ToLower().Contains(search.ToLower()), 0, 6).ToList(); }
 
 
             viewModelTeammember = Mapper.Map<IEnumerable<TeamMember>, IEnumerable<TeamMemberViewModel>>(member);
-            return PartialView("_MemberView", viewModelTeammember);
+            return PartialView("_MemberListView", viewModelTeammember);
         }
 
         public ActionResult Group(string groupname = null)
@@ -100,10 +115,10 @@ namespace Organisation.Web.Controllers
             GroupViewModel fullview;
             Group group;
 
-            int skipcount = pagesize ;
+            int skipcount = pagesize;
             group = groupService.GetGroup(groupname);
             group.Team = teamService.GetAllTeam(null).Where(c => c.GroupId == group.Id);
-            group.TeamMember = teamMemberService.GetMany(c => c.Team.GroupId == group.Id, 0,pagesize);
+            group.TeamMember = teamMemberService.GetMany(c => c.Team.GroupId == group.Id, 0, pagesize);
 
             bool teamview = false; bool memberview = false; bool chartview = false;
             if (Convert.ToInt32(selected) == 1)
@@ -147,12 +162,12 @@ namespace Organisation.Web.Controllers
                 return View("GroupDetails", fullview);
             }
 
-            
+
             return View("GroupDetails", fullview);
         }
         public ActionResult TeamTabDetails(string selected, string teamname = null)
         {
-           
+
             TeamViewModel fullview;
             Team team;
             team = teamService.GetTeam(teamname);
@@ -169,7 +184,7 @@ namespace Organisation.Web.Controllers
             {
 
                 team.TeamMember = teamMemberService.GetAllTeamMember(null)
-                    .Where(c => c.TeamId == team.Id 
+                    .Where(c => c.TeamId == team.Id
                     && c.MemberStatus.ToString() == MemberStatusselect.Allocated_to_Team.ToString()
                     && c.BillableStatus.ToString() == BillableStatusselect.Billable.ToString()).ToList().Skip(0).Take(pagesize);
                 memberview = true;
@@ -197,7 +212,7 @@ namespace Organisation.Web.Controllers
             fullview.isMemberView = memberview;//returns if it is team view or member view to beb diasplayed
             fullview.isChartsView = chartview;//returns if it is team view or member view to beb diasplayed
 
-            
+
 
             fullview.billableMemberCount = teamMemberService.GetAllTeamMember(null).Where(c => c.TeamId == team.Id && c.MemberStatus.ToString() == TeamMemberViewModel.MemberStatusselect.Allocated_to_Team.ToString()
                 && c.BillableStatus.ToString() == TeamMemberViewModel.BillableStatusselect.Billable.ToString()).Count();
@@ -213,7 +228,7 @@ namespace Organisation.Web.Controllers
                 fullview.billMemberactive = "active";// sets member tab to avtive
                 fullview.nonBillMemberactive = fullview.benchMemberactive = fullview.teamactive = fullview.chartsactive = "";
 
-                
+
                 return PartialView("_MemberListView", fullview.TeamMembers);
             }
             else if (memberview && Convert.ToInt32(selected) == 4)
@@ -249,27 +264,28 @@ namespace Organisation.Web.Controllers
 
         }
 
-        public ActionResult MemberPartial(int id ,int type,int calledfrom,int? isdelete,int?memberid,int? page)
+        public ActionResult MemberPartial(int id, int type, int calledfrom, int? isdelete, int? memberid, int? page)
         {
             IEnumerable<TeamMemberViewModel> viewModelTeammember;
             IEnumerable<TeamMember> member = null;
 
-            if(isdelete==1)
-            { if (memberid.HasValue)
+            if (isdelete == 1)
+            {
+                if (memberid.HasValue)
                 {
                     int id1 = memberid ?? 1;
-                  
+
                     teamMemberService.DeleteTeamMember(id1);
                     teamMemberService.SaveTeamMember();
-                    
+
                 }
             }
 
             int skipcount = pagesize * ((page ?? 1) - 1);
             if (calledfrom == 1)
             {
-                             member = teamMemberService.GetMany(c => c.Team.GroupId==id, skipcount, pagesize);
-                
+                member = teamMemberService.GetMany(c => c.Team.GroupId == id, skipcount, pagesize);
+
             }
             else if (calledfrom == 2)
             {
@@ -295,7 +311,15 @@ namespace Organisation.Web.Controllers
                         && c.BillableStatus.ToString() == BillableStatusselect.Non_Billable.ToString(), skipcount, pagesize);
 
                 }
-   
+
+
+
+            }
+            else if (calledfrom == 3)
+            {
+                int skip = 6 * ((page ?? 1) - 1);
+                member = teamMemberService.GetMany(c => c.Id != 0, skip, 6).ToList();
+
             }
             viewModelTeammember = Mapper.Map<IEnumerable<TeamMember>, IEnumerable<TeamMemberViewModel>>(member);
 
@@ -309,6 +333,8 @@ namespace Organisation.Web.Controllers
             team = teamService.GetAllTeam(groupname).ToList();
 
             teamViewModel = Mapper.Map<IEnumerable<Team>, IEnumerable<TeamViewModel>>(team);
+            foreach (var item in teamViewModel)
+                item.toatalMemberCount = teamMemberService.GetMany(c => c.TeamId == item.Id, 0, 10000000).Count();
             return View(teamViewModel);
         }
 
@@ -418,20 +444,40 @@ namespace Organisation.Web.Controllers
             if (tm.mode != 2)
             {
 
-
-                if (tm.File != null)
+                if (ModelState.IsValid)
                 {
+                    if (tm.File != null)
+                    {
 
-                    string memberPicture = tm.Name + ".png";
-                    tm.Image = memberPicture;
-                    string path = System.IO.Path.Combine(Server.MapPath("~/images/"), memberPicture);
-                    tm.File.SaveAs(path);
+                        string memberPicture = tm.Name + ".png";
+                        tm.Image = memberPicture;
+                        string path = System.IO.Path.Combine(Server.MapPath("~/images/"), memberPicture);
+                        tm.File.SaveAs(path);
+                    }
+                    var teammember = Mapper.Map<TeamMemberViewModel, TeamMember>(tm);
+                    teamMemberService.UpdateTeamMember(teammember);
+
+
+                    teamMemberService.SaveTeamMember();
                 }
-                var teammember = Mapper.Map<TeamMemberViewModel, TeamMember>(tm);
-                teamMemberService.UpdateTeamMember(teammember);
+                else
+                {
+                    tm.File = null;
+                    int year = DateTime.UtcNow.Year;
+                    int last = year - 70;
+                    int count = 0;
+                    List<string> yearpass = new List<string>();
 
+                    for (int i = year; i > last; i--)
+                    {
+                        yearpass.Add("" + i);
+                        count++;
+                    }
+                    tm.YearPass = yearpass.ToList();
 
-                teamMemberService.SaveTeamMember();
+                    tm.TeamList = teamService.GetAllTeam(null).ToList();
+                    return View(tm);
+                }
             }
             else
             {
@@ -472,7 +518,7 @@ namespace Organisation.Web.Controllers
                     return View(tm);
                 }
             }
-            return RedirectToAction("Index", new { membername = "" });
+            return Redirect(tm.previousUrl);
         }
         public ActionResult CreateTeamMember(int id, int mode)
         {
@@ -500,6 +546,7 @@ namespace Organisation.Web.Controllers
                 fullview.YearPass = yearpass.ToList();
                 fullview.mode = mode;
                 fullview.TeamList = teamService.GetAllTeam(null).ToList();
+                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
                 fullview.Image = "Capture.png";
                 return View(fullview);
 
@@ -531,9 +578,207 @@ namespace Organisation.Web.Controllers
                 fullview.YearPass = yearpass.ToList();
                 fullview.mode = mode;
                 fullview.TeamList = teamService.GetAllTeam(null).ToList();
-
+                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
                 return View(fullview);
             }
+        }
+
+        public ActionResult CreateEditGroup(int id, int mode)
+        {
+
+            if (mode == 2)
+            {
+                GroupViewModel fullview = new GroupViewModel();
+                fullview.mode = mode;
+                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
+                return View(fullview);
+
+            }
+            else
+            {
+                GroupViewModel fullview;
+                Group group = groupService.GetGroup(id);
+                fullview = Mapper.Map<Group, GroupViewModel>(group);
+                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
+                fullview.mode = mode;
+                return View(fullview);
+
+            }
+
+        }
+        [HttpPost]
+        public ActionResult CreateEditGroup(GroupViewModel group)
+        {
+            if (group.mode == 2)
+            {
+                if (ModelState.IsValid)
+                {
+                    var t = Mapper.Map<GroupViewModel, Group>(group);
+                    groupService.CreateGroup(t);
+                    groupService.SaveGroup();
+                    return Redirect(group.previousUrl);
+                }
+                else
+                {
+                    return View(group);
+                }
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var t = Mapper.Map<GroupViewModel, Group>(group);
+                    groupService.UpdateGroup(t);
+                    groupService.SaveGroup();
+                    return Redirect(group.previousUrl);
+                }
+                else
+                {
+                    return View(group);
+                }
+            }
+
+        }
+        [HttpPost]
+        public ActionResult CreateEditTeam(TeamViewModel team)
+        {
+            if (team.mode == 2)
+            {
+                if (ModelState.IsValid)
+                {
+                    var t = Mapper.Map<TeamViewModel, Team>(team);
+                    teamService.CreateTeam(t);
+                    teamService.SaveTeam();
+                    return Redirect(team.previousUrl);
+                }
+                else
+                {
+
+                    team.GroupList = groupService.GetAllGroup(null).ToList();
+                    return View(team);
+                }
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var t = Mapper.Map<TeamViewModel, Team>(team);
+                    teamService.UpdateTeam(t);
+                    teamService.SaveTeam();
+                    return Redirect(team.previousUrl);
+                }
+                else
+                {
+                    team.GroupList = groupService.GetAllGroup(null).ToList();
+                    return View(team);
+
+                }
+            }
+
+        }
+
+        public ActionResult BackPage(string url)
+        {
+            return Redirect(url);
+        }
+
+
+        public ActionResult CreateEditTeam(int id, int mode)
+        {
+            if (mode == 2)
+            {
+                TeamViewModel fullview = new TeamViewModel();
+                fullview.mode = mode;
+                fullview.GroupList = groupService.GetAllGroup(null).ToList();
+                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
+                return View(fullview);
+
+            }
+            else
+            {
+
+
+
+                TeamViewModel fullview;
+                Team team = teamService.GetTeam(id);
+                fullview = Mapper.Map<Team, TeamViewModel>(team);
+                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
+                fullview.GroupList = groupService.GetAllGroup(null).ToList();
+                fullview.mode = mode;
+                return View(fullview);
+
+            }
+        }
+        public ActionResult DeleteGroup(int id)
+        {
+            IEnumerable<Team> t = teamService.GetAllTeam().Where(c => c.GroupId == id).ToList();
+
+
+            if (t.Count() < 1)
+            {
+
+                groupService.DeleteGroup(id);
+                groupService.SaveGroup();
+
+                IEnumerable<GroupViewModel> groupViewModel;
+                IEnumerable<Group> group;
+
+
+                group = groupService.GetAllGroup(null).ToList();
+                foreach (var item in group)
+                    item.Team = teamService.GetAllTeam(null).Where(c => c.GroupId == item.Id);
+
+                groupViewModel = Mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>(group);
+                return PartialView("_GroupView", groupViewModel);
+
+
+            }
+            else
+
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult DeleteTeam(int id)
+        {
+            IEnumerable<TeamMember> t = teamMemberService.GetMany(c => c.TeamId == id, 0, 10);
+
+
+            if (t.Count() < 1)
+            {
+
+
+
+                IEnumerable<TeamViewModel> teamViewModel;
+                IEnumerable<Team> team = null;
+
+                string r = Request.UrlReferrer.ToString();
+                if (r.ToLower().Contains("group"))
+                {
+                    var group = teamService.GetTeam(id);
+                    teamService.DeleteTeam(id);
+                    teamService.SaveTeam();
+                    team = teamService.GetAllTeam(null).Where(c => c.GroupId == group.GroupId).ToList();
+
+                }
+                else if (r.ToLower().Contains("team"))
+                {
+                    teamService.DeleteTeam(id);
+                    teamService.SaveTeam();
+                    team = teamService.GetAllTeam(null).ToList();
+
+                }
+
+                teamViewModel = Mapper.Map<IEnumerable<Team>, IEnumerable<TeamViewModel>>(team);
+                foreach (var item in teamViewModel)
+                    item.toatalMemberCount = teamMemberService.GetMany(c => c.TeamId == item.Id, 0, 1000000).Count();
+
+                return PartialView("_TeamView", teamViewModel);
+            }
+            else
+
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

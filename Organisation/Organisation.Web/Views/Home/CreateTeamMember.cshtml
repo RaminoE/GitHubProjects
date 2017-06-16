@@ -13,23 +13,21 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var selectedDT = $("#memberstatus").val();
-       
-        if (selectedDT == "" ) {
+
+        if (selectedDT == "") {
             $("#rowBillablestatus").hide();
             $("#rowTeam").hide();
         }
-        else if(selectedDT==null)
-        {
+        else if (selectedDT == null) {
 
         }
         else if (selectedDT == 0) {
-           
+
             $("#rowBillablestatus").show();
             $("#rowTeam").show();
         }
-        else
-        {
-          
+        else {
+
             $("#rowBillablestatus").hide();
             $("#rowTeam").hide();
         }
@@ -53,7 +51,7 @@
                     $("#rowTeam").show();
                 }
                 else {
-                    
+
 
                     $("#Billablestatus").val("");
 
@@ -99,37 +97,37 @@
                 </div>
                 <div class="col-md-4 ">
                     <div class="row space">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
                         </div>
-                        <div class="col-md-8 ">
+                        <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style = "width:100%", @readonly = "readonly" } })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;", @readonly = "readonly" } })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             }
 
                         </div>
                     </div>
                     <div class="row space">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label " })
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.Designation, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
                            })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -137,20 +135,20 @@
                     <div class="row space">
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label " })
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.DOB, new
-                               {
-                                   htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                               })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -163,13 +161,13 @@
                     {
                         <div class="row space">
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label " })
                             </div>
 
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <input type="file" class="form-control" name="file" placeholder="Select picture..">
-                               
+
                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -177,9 +175,9 @@
                     <div class="row space">
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.IsTeanLead, htmlAttributes: new { @class = "control-label " })
-                        </div>  <div class="col-md-8">
+                        </div>  <div class="col-md-7">
                             <div class="checkbox">
                                 @Html.EditorFor(model => model.IsTeanLead)
                                 @Html.ValidationMessageFor(model => model.IsTeanLead, "", new { @class = "text-danger" })
@@ -187,15 +185,15 @@
                         </div>
                     </div>
                     <div class="row space">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.BriefDescription, htmlAttributes: new { @class = "control-label " })
-                        </div> <div class="col-md-8">
+                        </div> <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.TextAreaFor(model => model.BriefDescription, 2, 50, new
-                                           {
-                                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = true }
-                                           })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = true }
+                           })
                             }
                             else
                             {
@@ -206,34 +204,34 @@
                     </div>
                     <div class="row space">
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.HighestQualification, htmlAttributes: new { @class = "control-label " })
-                        </div>   <div class="col-md-8">
+                        </div>   <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.HighestQualification, new
-                                               {
-                                                   htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                                               })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.HighestQualification, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.HighestQualification, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.HighestQualification, "", new { @class = "text-danger" })
                             }
                         </div>
                     </div>
                     <div class="row space">
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
-                        </div>   <div class="col-md-8">
+                        </div>   <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.TextAreaFor(model => model.Address, 2, 50, new
-                                                   {
-                                                       htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = true }
-                                                   })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = true }
+                           })
                             }
                             else
                             {
@@ -245,43 +243,43 @@
                     <div class="row space">
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label" })
-                        </div> <div class="col-md-8">
+                        </div> <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.phoneNumber, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
                            })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
                             }
                         </div>
                     </div>
 
-                   
+
 
                 </div>
                 <div class="col-md-5">
                     <div class="row space">
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.YearOfPassing, htmlAttributes: new { @class = "control-label " })
-                        </div>  <div class="col-md-8">
+                        </div>  <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.YearOfPassing, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
                            })
                             }
                             else
                             {
-                                @Html.DropDownListFor(x => x.YearOfPassing, new SelectList(Model.YearPass, new { @class = "" }),
+                                @Html.DropDownListFor(x => x.YearOfPassing, new SelectList(Model.YearPass, new { htmlAttributes = new { @class = "form-control", @style = "width:100% ;font-size:12px;height:30px;" } }),
                                     "Select Year")
                                 @Html.ValidationMessageFor(model => model.YearOfPassing, "", new { @class = "text-danger" })
                             }
@@ -291,57 +289,57 @@
 
 
                     <div class="row space">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.YearofJoiningCCI, htmlAttributes: new { @class = "control-label" })
-                        </div> <div class="col-md-8">
+                        </div> <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.YearofJoiningCCI, new
-                                                           {
-                                                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                                                           })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.YearofJoiningCCI, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.YearofJoiningCCI, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.YearofJoiningCCI, "", new { @class = "text-danger" })
                             }
                         </div>
                     </div>
                     <div class="row space">
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.YearofJoiningTeam, htmlAttributes: new { @class = "control-label " })
-                        </div>  <div class="col-md-8">
+                        </div>  <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.YearofJoiningTeam, new
-                                                               {
-                                                                   htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                                                               })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.YearofJoiningTeam, "dd-MM-yyyy", new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.YearofJoiningTeam, "dd-MM-yyyy", new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.YearofJoiningTeam, "", new { @class = "text-danger" })
                             }
                         </div>
                     </div>
-                    
+
                     <div class="row space">
 
 
 
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.Technologies, htmlAttributes: new { @class = "control-label" })
-                        </div>  <div class="col-md-8">
+                        </div>  <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.TextAreaFor(model => model.Technologies, 2, 50, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = true }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = true }
                            })
                             }
                             else
@@ -354,19 +352,19 @@
                     <div class="row space">
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.SkypeId, htmlAttributes: new { @class = "control-label " })
-                        </div>  <div class="col-md-8">
+                        </div>  <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.SkypeId, new
-                                                                           {
-                                                                               htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                                                                           })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.SkypeId, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.SkypeId, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.SkypeId, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -374,19 +372,19 @@
                     <div class="row space">
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label" })
-                        </div> <div class="col-md-8">
+                        </div> <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.EmailId, new
-                                                                               {
-                                                                                   htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                                                                               })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -394,19 +392,19 @@
                     <div class="row space">
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.GmailId, htmlAttributes: new { @class = "control-label " })
-                        </div>  <div class="col-md-8">
+                        </div>  <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
                                 @Html.EditorFor(model => model.GmailId, new
-                                                                                   {
-                                                                                       htmlAttributes = new { @class = "form-control", @style = "width:100%, background-color:transparent", @readonly = "readonly" }
-                                                                                   })
+                           {
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                           })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.GmailId, new { htmlAttributes = new { @class = "form-control", @style = "width:100%" } })
+                                @Html.EditorFor(model => model.GmailId, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
                                 @Html.ValidationMessageFor(model => model.GmailId, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -415,24 +413,24 @@
 
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             @Html.LabelFor(model => model.MemberStatus, htmlAttributes: new { @class = "control-label " })
-                        </div>   <div class="col-md-8">
+                        </div>   <div class="col-md-7">
                             @if (Model.mode == 0)
                             {
-                               @Html.EditorFor(model => model.MemberStatus, new
+                                @Html.EditorFor(model => model.MemberStatus, new
                           {
                               htmlAttributes = new
                               {
                                   @class = "form-control",
-                                  @style = "width:100%, background-color:transparent",
+                                  @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent",
                                   @readonly = "readonly"
                               }
                           })
                             }
                             else
                             {
-                                @Html.EnumDropDownListFor(model => model.MemberStatus, "Select Status", htmlAttributes: new { @class = "form-control", id = "memberstatus" })
+                                @Html.EnumDropDownListFor(model => model.MemberStatus, "Select Status", htmlAttributes: new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:30px;", id = "memberstatus" })
                                 @Html.ValidationMessageFor(model => model.MemberStatus, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -445,19 +443,19 @@
 
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.BillableStatus, htmlAttributes: new { @class = "control-label " })
-                            </div>   <div class="col-md-8">
+                            </div>   <div class="col-md-7">
 
                                 @Html.EditorFor(model => model.BillableStatus, new
-                                                                                           {
-                                                                                               htmlAttributes = new
-                                                                                               {
-                                                                                                   @class = "form-control",
-                                                                                                   @style = "width:100%, background-color:transparent",
-                                                                                                   @readonly = "readonly"
-                                                                                               }
-                                                                                           })
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control",
+                                   @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent",
+                                   @readonly = "readonly"
+                               }
+                           })
                             </div>
 
                         </div>
@@ -471,10 +469,10 @@
 
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.BillableStatus, htmlAttributes: new { @class = "control-label " })
-                            </div>   <div class="col-md-8">
-                                @Html.EnumDropDownListFor(model => model.BillableStatus, "Select Status", htmlAttributes: new { @class = "form-control", id = "Billablestatus" })
+                            </div>   <div class="col-md-7">
+                                @Html.EnumDropDownListFor(model => model.BillableStatus, "Select Status", htmlAttributes: new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:30px;", id = "Billablestatus" })
                                 @Html.ValidationMessageFor(model => model.BillableStatus, "", new { @class = "text-danger" })
                             </div>
 
@@ -483,13 +481,13 @@
 
                     @if (Model.mode == 0)
                     {
-                        <div id="rowTeam" class="row space">
+                        <div id="rowTeam" class="row">
 
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.TeamId, htmlAttributes: new { @class = "control-label " })
-                            </div>   <div class="col-md-8">
+                            </div>   <div class="col-md-7">
                                 @Html.DropDownListFor(x => x.TeamId, new SelectList(Model.TeamList, "Id", "Name", new { @class = "form-control", id = "team", @readonly = "readonly" }),
 "Select Team")
                                 @Html.ValidationMessageFor(model => model.TeamId, "", new { @class = "text-danger" })
@@ -504,9 +502,9 @@
 
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.TeamId, htmlAttributes: new { @class = "control-label " })
-                            </div>   <div class="col-md-8">
+                            </div>   <div class="col-md-7">
                                 @Html.DropDownListFor(x => x.TeamId, new SelectList(Model.TeamList, "Id", "Name", new { @class = "form-control", id = "team", @readonly = "readonly" }),
 "Select Team")
                                 @Html.ValidationMessageFor(model => model.TeamId, "", new { @class = "text-danger" })
@@ -517,11 +515,11 @@
 
 
 
-                    <div class="col-md-2" hidden="hidden">
+                    <div class="col-md-3" hidden="hidden">
                         @Html.LabelFor(model => model.mode, htmlAttributes: new { @class = "control-label ", @hidden = "hidden" })
                         @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @style = "height:0%;visibility:hidden" } })
-                    </div>   <div class="col-md-8">
-                        @Html.EditorFor(model => model.mode, new { htmlAttributes = new { @class = "form-control", @style = "width:100%; visibility:hidden" } })
+                    </div>   <div class="col-md-7">
+                        @Html.EditorFor(model => model.mode, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;; visibility:hidden" } })
                         @Html.ValidationMessageFor(model => model.mode, "", new { @class = "text-danger" })
                     </div>
 
@@ -539,5 +537,9 @@
         </div>
     </div>
 
-
+    @Html.EditorFor(model => model.previousUrl, new { htmlAttributes = new { @class = "", @hidden = "hidden" } })
 }
+<div>
+    @Html.ActionLink("Back to List", "BackPage", new { url = @Model.previousUrl })
+</div>
+

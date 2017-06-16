@@ -15,6 +15,7 @@ namespace Organisation.Domain.Service.Pattern
         void CreateGroup(Group group);
         void UpdateGroup(Group group);
         void DeleteGroup(Group group);
+        void DeleteGroup(int id);
         void SaveGroup();
     }
 }

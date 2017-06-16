@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Organisation.Domian.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,8 +28,12 @@ namespace Organisation.Web.ViewModels
         public int billableMemberCount { get; set; }
         public int nonBillableMemberCount { get; set; }
         public int benchMemberCount { get; set; }
-
+        public IEnumerable<Group> GroupList { get; set; }
         public int pagesize { get; set; }
+        public int calledEditFrom { get; set; }
+        public int mode { get; set; }
+
+        public string previousUrl { get; set; }
 
     }
 }

@@ -17,5 +17,6 @@ namespace Organisation.Domain.Service.Pattern
         void UpdateTeam(Team team);
         void DeleteTeam(Team team);
         void SaveTeam();
+        void DeleteTeam(int id);
     }
 }

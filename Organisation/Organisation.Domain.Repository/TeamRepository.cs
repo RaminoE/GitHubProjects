@@ -9,7 +9,7 @@ using Organisation.Domain.Repository.Pattern;
 
 namespace Organisation.Domain.Repository
 {
-    public class TeamRepository : Repository<Team>,ITeamRepository
+    public class TeamRepository : Repository<Team>, ITeamRepository
     {
         public TeamRepository(IDbFactory dbFactory) : base(dbFactory)
         {
