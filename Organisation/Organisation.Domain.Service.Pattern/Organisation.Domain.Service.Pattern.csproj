@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IGroupService.cs" />
+    <Compile Include="ILoginService.cs" />
     <Compile Include="ITeamMemberAssignmentService.cs" />
     <Compile Include="ITeamMemberService.cs" />
     <Compile Include="ITeamService.cs" />

@@ -11,7 +11,7 @@ namespace Organisation.Domain.Ef.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Organisation.Domain.EF.OrganisationEntities context)
@@ -30,107 +30,107 @@ namespace Organisation.Domain.Ef.Migrations
             //
 
 
-            GetGroups().ForEach(g => context.Groups.Add(g));
-            GetTeams().ForEach(g => context.Teams.Add(g));
-            GetTeamMemebers().ForEach(g => context.TeamMembers.Add(g));
+            //GetGroups().ForEach(g => context.Groups.Add(g));
+            //GetTeams().ForEach(g => context.Teams.Add(g));
+            //GetTeamMemebers().ForEach(g => context.TeamMembers.Add(g));
 
-            context.Commit();
+           // context.Commit();
         }
 
-        private static List<Group> GetGroups()
-        {
-            return new List<Group>
-            {
-                new Group {
-                    Name = "Web",
-                    DateCreated=DateTime.UtcNow,
-                   DateModified=DateTime.UtcNow,
-                },
-                new Group {
-                    Name = "Mobile",
-                    DateCreated=DateTime.UtcNow,
-                   DateModified=DateTime.UtcNow,
-                },
+        //private static List<Group> GetGroups()
+        //{
+        //    return new List<Group>
+        //    {
+        //        new Group {
+        //            Name = "Web",
+        //            DateCreated=DateTime.UtcNow,
+        //           DateModified=DateTime.UtcNow,
+        //        },
+        //        new Group {
+        //            Name = "Mobile",
+        //            DateCreated=DateTime.UtcNow,
+        //           DateModified=DateTime.UtcNow,
+        //        },
 
-            };
-        }
+        //    };
+        //}
 
-        private static List<Team> GetTeams()
-        {
-            return new List<Team>
-            {
-                new Team {
-                    Name = "SAR",
-                    ClientName="client2",
-                    GroupId=1,
-                    DateCreated=DateTime.UtcNow,
-                   DateModified=DateTime.UtcNow,
-                },
-                new Team {
-                    Name = "NETKEMIA",
-                    ClientName="Client1",
-                    GroupId=2,
-                    DateCreated=DateTime.UtcNow,
-                   DateModified=DateTime.UtcNow,
-                },
+        //private static List<Team> GetTeams()
+        //{
+        //    return new List<Team>
+        //    {
+        //        new Team {
+        //            Name = "SAR",
+        //            ClientName="client2",
+        //            GroupId=1,
+        //            DateCreated=DateTime.UtcNow,
+        //           DateModified=DateTime.UtcNow,
+        //        },
+        //        new Team {
+        //            Name = "NETKEMIA",
+        //            ClientName="Client1",
+        //            GroupId=2,
+        //            DateCreated=DateTime.UtcNow,
+        //           DateModified=DateTime.UtcNow,
+        //        },
                
-                // Code ommitted 
-            };
-        }
+        //        // Code ommitted 
+        //    };
+        //}
 
-        private static List<TeamMember> GetTeamMemebers()
-        {
-            return new List<TeamMember>
-            {
-                new TeamMember {
-                    Name = "TeamMember1",
-                    Designation="Developer",
-                    DOB=DateTime.Parse("1991-01-01"),
-                    TeamId=1,
-                    Image="Capture.png",
-                    IsTeanLead=false,
-                   SkypeId="abc@skype.com",
-                   GmailId="abc@gmail.com",
-                   EmailId="acd@skype.com",
-                   Address="Goa",
-                   BriefDescription="",
-                   HighestQualification="MSC.IT",
-                   YearofJoiningCCI=DateTime.UtcNow,
-                   YearOfPassing="2007",
-                   YearofJoiningTeam=DateTime.UtcNow,
-                   phoneNumber="9955223366",
-                   Technologies=".net",
-                   DateCreated=DateTime.UtcNow,
-                   DateModified=DateTime.UtcNow,
+        //private static List<TeamMember> GetTeamMemebers()
+        //{
+        //    return new List<TeamMember>
+        //    {
+        //        new TeamMember {
+        //            Name = "TeamMember1",
+        //            Designation=1,
+        //            DOB=DateTime.Parse("1991-01-01"),
+        //            TeamId=1,
+        //            Image="Capture.png",
+        //            IsTeanLead=false,
+        //           SkypeId="abc@skype.com",
+        //           GmailId="abc@gmail.com",
+        //           EmailId="acd@skype.com",
+        //           Address="Goa",
+        //           BriefDescription="",
+        //           HighestQualification="MSC.IT",
+        //           YearofJoiningCCI=DateTime.UtcNow,
+        //           YearOfPassing=2007,
+        //            YearofJoiningTeam =DateTime.UtcNow,
+        //           phoneNumber="9955223366",
+        //           Technologies=".net",
+        //           DateCreated=DateTime.UtcNow,
+        //           DateModified=DateTime.UtcNow,
 
 
 
-                },
-              new TeamMember {
-                    Name = "TeamMember2",
-                    Designation="Developer",
-                    DOB=DateTime.Parse("1991-01-01"),
-                    TeamId=1,
-                    Image="Capture.png",
-                    IsTeanLead=false,
-                     SkypeId="abc@skype.com",
-                   GmailId="abc@gmail.com",
-                   EmailId="acd@skype.com",
-                   Address="Goa",
-                   BriefDescription="",
-                   HighestQualification="MSC.IT",
-                   YearofJoiningCCI=DateTime.UtcNow,
-                   YearOfPassing="2007",
-                   YearofJoiningTeam=DateTime.UtcNow,
-                   phoneNumber="9955223366",
-                   Technologies=".net",
-                   DateCreated=DateTime.UtcNow,
-                   DateModified=DateTime.UtcNow,
-                },
+        //        },
+        //      new TeamMember {
+        //            Name = "TeamMember2",
+        //            Designation=1,
+        //            DOB=DateTime.Parse("1991-01-01"),
+        //            TeamId=1,
+        //            Image="Capture.png",
+        //            IsTeanLead=false,
+        //             SkypeId="abc@skype.com",
+        //           GmailId="abc@gmail.com",
+        //           EmailId="acd@skype.com",
+        //           Address="Goa",
+        //           BriefDescription="",
+        //           HighestQualification="MSC.IT",
+        //           YearofJoiningCCI=DateTime.UtcNow,
+        //           YearOfPassing=2007,
+        //           YearofJoiningTeam=DateTime.UtcNow,
+        //           phoneNumber="9955223366",
+        //           Technologies=".net",
+        //           DateCreated=DateTime.UtcNow,
+        //           DateModified=DateTime.UtcNow,
+        //        },
                
-                // Code ommitted 
-            };
-        }
+        //        // Code ommitted 
+        //    };
+        //}
 
     }
 }

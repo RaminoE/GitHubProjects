@@ -9,24 +9,31 @@ namespace Organisation.Domian.Model.Models
 {
     public enum MemberStatus
     {
-        Allocated_to_Team,
-        Bench
+        Allocated_to_Team=1,
+        Bench=2
     }
 
     public enum BillableStatus
     {
-        Billable,
-        Non_Billable
+        Billable=1,
+        Non_Billable=2
+    }
+    public enum Designations
+    {
+        Junior_Developer = 1,
+        Developer = 2,
+        Senior_Developer = 3,
+        Team_Lead = 4
     }
     public class TeamMember: LogingEntity
     {
         public string Name { get; set; }
-        public string Designation { get; set; }
+        public Designations? Designation { get; set; }
         public DateTime DOB { get; set; }
 
         public string Image { get; set; }
         public bool IsTeanLead { get; set; }
-        public System.Nullable<int> TeamId { get; set; }
+        public int? TeamId { get; set; }
         public Team Team { get; set; }
         public MemberStatus? MemberStatus { get; set; }
         public BillableStatus? BillableStatus { get; set; }
@@ -34,7 +41,7 @@ namespace Organisation.Domian.Model.Models
 
         public string HighestQualification { get; set; }
 
-        public string YearOfPassing { get; set; }
+        public int YearOfPassing { get; set; }
         public DateTime YearofJoiningCCI { get; set; }
 
         public DateTime YearofJoiningTeam { get; set; }

@@ -21,7 +21,7 @@
         else if (selectedDT == null) {
 
         }
-        else if (selectedDT == 0) {
+        else if (selectedDT == 1) {
 
             $("#rowBillablestatus").show();
             $("#rowTeam").show();
@@ -39,9 +39,9 @@
 
             var selectedDT = $("#memberstatus").val();
 
-
+            alert(selectedDT);
             if (selectedDT != "") {
-                if (selectedDT == 0) {
+                if (selectedDT == 1) {
 
 
 
@@ -73,7 +73,7 @@
 @using (Html.BeginForm("CreateTeamMember", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
 {
 
-    @Html.AntiForgeryToken()
+    
 
     <br />
     <div class="panel panel-success panelpg">
@@ -127,7 +127,8 @@
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
+                                @Html.EnumDropDownListFor(model => model.Designation, "Select Designation", htmlAttributes: new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:30px;", id = "Designation" })
+                                @*@Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })*@
                                 @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -143,12 +144,12 @@
                             {
                                 @Html.EditorFor(model => model.DOB, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:25px;, background-color:transparent", @readonly = "readonly" }
                            })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
+                                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:25px;" } })
                                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -296,12 +297,12 @@
                             {
                                 @Html.EditorFor(model => model.YearofJoiningCCI, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:25px; background-color:transparent", @readonly = "readonly" }
                            })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.YearofJoiningCCI, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
+                                @Html.EditorFor(model => model.YearofJoiningCCI, new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:25px;" } })
                                 @Html.ValidationMessageFor(model => model.YearofJoiningCCI, "", new { @class = "text-danger" })
                             }
                         </div>
@@ -315,12 +316,12 @@
                             {
                                 @Html.EditorFor(model => model.YearofJoiningTeam, new
                            {
-                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;, background-color:transparent", @readonly = "readonly" }
+                               htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:25px;, background-color:transparent", @readonly = "readonly" }
                            })
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.YearofJoiningTeam, "dd-MM-yyyy", new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:20px;" } })
+                                @Html.EditorFor(model => model.YearofJoiningTeam, "dd-MM-yyyy", new { htmlAttributes = new { @class = "form-control", @style = "width:100%  ;font-size:12px;height:25px;" } })
                                 @Html.ValidationMessageFor(model => model.YearofJoiningTeam, "", new { @class = "text-danger" })
                             }
                         </div>

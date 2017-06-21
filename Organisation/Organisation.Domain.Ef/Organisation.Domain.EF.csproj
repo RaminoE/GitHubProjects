@@ -38,6 +38,14 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,10 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomLibraries\CustomDecrypt.cs" />
+    <Compile Include="CustomLibraries\CustomEncrypt.cs" />
+    <Compile Include="Mappings\ApplicationUserMappings.cs" />
+    <Compile Include="Mappings\LoginMappings.cs" />
     <Compile Include="Mappings\GroupMappings.cs" />
+    <Compile Include="Mappings\RegisterMappings.cs" />
     <Compile Include="Mappings\TeamMappings.cs" />
     <Compile Include="Mappings\TeamMemberAssignmentMapping.cs" />
     <Compile Include="Mappings\TeamMemberMappings.cs" />
+    <Compile Include="Migrations\201706210913577_m1.cs" />
+    <Compile Include="Migrations\201706210913577_m1.Designer.cs">
+      <DependentUpon>201706210913577_m1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrganisationEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +84,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706210913577_m1.resx">
+      <DependentUpon>201706210913577_m1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

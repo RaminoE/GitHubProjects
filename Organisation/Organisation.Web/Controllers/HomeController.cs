@@ -23,6 +23,10 @@ namespace Organisation.Web.Controllers
         private readonly IGroupService groupService;
         private readonly ITeamService teamService;
         private readonly ITeamMemberService teamMemberService;
+        public HomeController()
+        {
+
+        }
 
         public HomeController(IGroupService groupService, ITeamService teamService, ITeamMemberService teamMemberService)
         {
@@ -35,7 +39,7 @@ namespace Organisation.Web.Controllers
         {
             IEnumerable<TeamMemberViewModel> viewModelTeammember;
             IEnumerable<TeamMember> member;
-            IEnumerable<Group> group;
+            
 
             member = teamMemberService.GetAllTeamMember().ToList();
 
@@ -74,7 +78,7 @@ namespace Organisation.Web.Controllers
             viewModelTeammember = Mapper.Map<IEnumerable<TeamMember>, IEnumerable<TeamMemberViewModel>>(member);
             return PartialView("_MemberListView", viewModelTeammember);
         }
-
+        [Authorize]
         public ActionResult Group(string groupname = null)
         {
             IEnumerable<GroupViewModel> groupViewModel;
@@ -88,7 +92,7 @@ namespace Organisation.Web.Controllers
             groupViewModel = Mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>(group);
             return View(groupViewModel);
         }
-
+        [Authorize]
         public ActionResult GroupDetails(string selected, string groupname = null)
         {
             GroupViewModel fullview;
@@ -108,6 +112,7 @@ namespace Organisation.Web.Controllers
             fullview.pagesize = pagesize;
             return View(fullview);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult Details(string selected, string groupname = null)
         {
@@ -165,6 +170,7 @@ namespace Organisation.Web.Controllers
 
             return View("GroupDetails", fullview);
         }
+        [Authorize]
         public ActionResult TeamTabDetails(string selected, string teamname = null)
         {
 
@@ -263,7 +269,7 @@ namespace Organisation.Web.Controllers
             return View("TeamDetails", fullview);
 
         }
-
+        [Authorize]
         public ActionResult MemberPartial(int id, int type, int calledfrom, int? isdelete, int? memberid, int? page)
         {
             IEnumerable<TeamMemberViewModel> viewModelTeammember;
@@ -325,6 +331,7 @@ namespace Organisation.Web.Controllers
 
             return PartialView("_MemberListView", viewModelTeammember.ToList());
         }
+        [Authorize]
         public ActionResult Team(string groupname = null)
         {
             IEnumerable<TeamViewModel> teamViewModel;
@@ -337,7 +344,7 @@ namespace Organisation.Web.Controllers
                 item.toatalMemberCount = teamMemberService.GetMany(c => c.TeamId == item.Id, 0, 10000000).Count();
             return View(teamViewModel);
         }
-
+        [Authorize]
         public ActionResult TeamDetails(string selected, string teamname = null)
         {
             TeamViewModel fullview;
@@ -363,7 +370,7 @@ namespace Organisation.Web.Controllers
             fullview.benchMemberCount = teamMemberService.GetAllTeamMember(null).Where(c => c.TeamId == team.Id && c.MemberStatus.ToString() == TeamMemberViewModel.MemberStatusselect.Bench.ToString()).Count();
             return View(fullview);
         }
-
+        [Authorize]
         public ActionResult EditMember(int id, int mode)
         {
             if (mode == 2)
@@ -374,7 +381,7 @@ namespace Organisation.Web.Controllers
             {
                 TeamMemberViewModel fullview;
                 TeamMember teammember;
-                List<TeamViewModel> team;
+               
                 //IEnumerable<Team> team;
                 //IEnumerable<TeamMember> member;
                 teammember = teamMemberService.GetTeamMember(id);
@@ -690,7 +697,7 @@ namespace Organisation.Web.Controllers
                 TeamViewModel fullview = new TeamViewModel();
                 fullview.mode = mode;
                 fullview.GroupList = groupService.GetAllGroup(null).ToList();
-                fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
+               // fullview.previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
                 return View(fullview);
 
             }

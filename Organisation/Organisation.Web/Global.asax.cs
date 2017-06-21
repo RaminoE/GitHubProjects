@@ -16,11 +16,11 @@ namespace Organisation.Web
         {
             // Init database
             //System.Data.Entity.Database.SetInitializer(new StoreSeedData());
-
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            
             // Autofac and Automapper configurations
             Bootstrapper.Run();
         }

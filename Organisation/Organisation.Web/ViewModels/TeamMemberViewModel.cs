@@ -11,14 +11,22 @@ namespace Organisation.Web.ViewModels
     {
         public enum MemberStatusselect
         {
-            Allocated_to_Team,
-            Bench
+            Allocated_to_Team=1,
+            Bench=2
         }
 
         public enum BillableStatusselect
         {
-            Billable,
-            Non_Billable
+            Billable=1,
+            Non_Billable=2
+        }
+
+        public enum Designations
+        {
+            Junior_Developer = 1,
+            Developer = 2,
+            Senior_Developer = 3,
+            Team_Lead=4
         }
         [Display(Name = "Status")]
         [Required(ErrorMessage = "Please Fill")]
@@ -33,7 +41,7 @@ namespace Organisation.Web.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please Fill")]
-        public string Designation { get; set; }
+        public Designations Designation { get; set; }
 
         [Display(Name = "Birth Date")]
         [DataType(DataType.Date, ErrorMessage = "Invalid Date")]
@@ -65,7 +73,7 @@ namespace Organisation.Web.ViewModels
 
         [Display(Name = "Passing Year")]
         [Required(ErrorMessage = "Please Fill")]
-        public string YearOfPassing { get; set; }
+        public int YearOfPassing { get; set; }
 
         [Required(ErrorMessage = "Please Fill")]
         [Display(Name = "Joined CCI")]

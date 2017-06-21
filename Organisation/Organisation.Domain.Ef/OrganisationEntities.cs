@@ -1,4 +1,5 @@
 ﻿
+using Organisation.Domain.Ef.Mappings;
 using Organisation.Domain.EF.Mappings;
 using Organisation.Domian.Model.Models;
 using System;
@@ -17,7 +18,8 @@ namespace Organisation.Domain.EF
         public DbSet<Group> Groups { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
-        
+        public DbSet<Login> Login { get; set; }
+
         public virtual void Commit()
         {
             base.SaveChanges();
@@ -30,8 +32,9 @@ namespace Organisation.Domain.EF
             modelBuilder.Configurations.Add(new TeamMemberMappings());
             modelBuilder.Configurations.Add(new TeamMappings());
             modelBuilder.Configurations.Add(new GroupMappings());
-            //modelBuilder.Configurations.Add(new GroupMappings());
-
+            modelBuilder.Configurations.Add(new LoginMappings());
+            //modelBuilder.Configurations.Add(new RegisterMappings());
+            //modelBuilder.Configurations.Add(new ApplicationUserMappings());
 
         }
     }

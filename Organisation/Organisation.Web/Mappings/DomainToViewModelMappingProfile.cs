@@ -19,6 +19,12 @@ namespace Organisation.Web.Mappings
         protected override void Configure()
         {
 
+            Mapper.CreateMap<Login, LoginModel>()
+               .ForMember(g => g.Email, map => map.MapFrom(vm => vm.Email))
+               .ForMember(g => g.Name, map => map.MapFrom(vm => vm.Name))
+               .ForMember(g => g.Id, map => map.MapFrom(vm => vm.Id))
+               .ForMember(g => g.Password, map => map.MapFrom(vm => vm.Password));
+
             Mapper.CreateMap<Group, GroupViewModel>()
                 .ForMember(g => g.Team, map => map.MapFrom(vm => vm.Team))
                 .ForMember(g => g.TeamMember, map => map.MapFrom(vm => vm.TeamMember))
@@ -56,6 +62,13 @@ namespace Organisation.Web.Mappings
                  .ForMember(g => g.Id, map => map.MapFrom(vm => vm.Id))
                  .ForMember(g => g.Image, map => map.MapFrom(vm => vm.Image))
                  .ForMember(g => g.IsTeanLead, map => map.MapFrom(vm => vm.IsTeanLead));
+
+            Mapper.CreateMap<LoginModel,Login>()
+             .ForMember(g => g.Email, map => map.MapFrom(vm => vm.Email))
+             .ForMember(g => g.Name, map => map.MapFrom(vm => vm.Name))
+             .ForMember(g => g.Id, map => map.MapFrom(vm => vm.Id))
+             .ForMember(g => g.Password, map => map.MapFrom(vm => vm.Password));
+
 
         }
     }

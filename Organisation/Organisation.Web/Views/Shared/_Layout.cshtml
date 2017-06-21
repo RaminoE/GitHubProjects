@@ -18,30 +18,34 @@
 </head>
 <body>
     <div class="">
-       <input type="text" hidden="hidden" />
+        <input type="text" hidden="hidden" />
     </div>
-        <div id="myNavbar" class="panelbg zoomsm navbar navbar-default  navbar-fixed-top">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="container-fluid">
-                <div style="color:darkseagreen">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar "></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Creative Capsule", "Index", "Home", new { @class = "navbar-brand" })
-                </div>
+    <div id="myNavbar" class="panelbg zoomsm navbar navbar-default  navbar-fixed-top">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container-fluid">
+            <div style="color:darkseagreen">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar "></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            @if (@User.Identity.IsAuthenticated)
+            {
+
+                @Html.ActionLink("Creative Capsule", "Index", "Home", new { @class = "navbar-brand" })
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="nav navbar-nav ">
                         <li class="text-success">
                             @Html.ActionLink("Group", "Group", "Home", new { @class = "fa fa-users" })
                         </li>
-                        <li >
+                        <li>
                             @Html.ActionLink("Teams", "Team", "Home", new { @class = "fa fa-tumblr" })
                         </li>
-                        <li >
+                        <li>
                             @Html.ActionLink("Members", "Index", "Home", new { @class = "fa fa-user" })
                         </li>
                     </ul>
@@ -54,20 +58,34 @@
                             @Html.ActionLink("Teams", "CreateEditTeam", "Home", new { id = 0, mode = 2 }, new { @class = "fa fa-plus" })
                         </li>
                         <li>
-                            @Html.ActionLink("Members", "CreateTeamMember", "Home",new { id=0,mode=2}, new { @class = "fa fa-user-plus" })
+                            @Html.ActionLink("Members", "CreateTeamMember", "Home", new { id = 0, mode = 2 }, new { @class = "fa fa-user-plus" })
                         </li>
                     </ul>
-                   
+
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="text-success">
+                            @Html.ActionLink("Login", "Login", "Auth", new { @class = "fa fa-users" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Register", "Register", "Auth", new { @class = "fa fa-tumblr" })
+                        </li>
+                       
+                    </ul>
+                </div>
+            }
         </div>
-   
-    <div class="container-fluid body-content" >
-     
-    @RenderBody()
-        </div>
+    </div>
+
+    <div class="container-fluid body-content">
+
+        @RenderBody()
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     @Scripts.Render("~/bootstrap/js")
 </body>
 </html>
-
